@@ -6,6 +6,13 @@ class Movies extends Component {
     movies: getMovies(),
   };
 
+  handleDelete = (movie) => {
+    const movies = this.state.movies.filter(
+      (currMovie) => currMovie._id !== movie._id
+    );
+    this.setState({ movies });
+  };
+
   render() {
     return (
       <>
@@ -22,13 +29,18 @@ class Movies extends Component {
 
           <tbody>
             {this.state.movies.map((movie) => (
-              <tr>
+              <tr key={movie._id}>
                 <td>{movie.title}</td>
                 <td>{movie.genre.name}</td>
                 <td>{movie.numberInStock}</td>
                 <td>{movie.dailyRentalRate}</td>
                 <td>
-                  <button className="btn btn-danger btn-sm">Delete</button>
+                  <button
+                    onClick={() => this.handleDelete(movie)}
+                    className="btn btn-danger btn-sm"
+                  >
+                    Delete
+                  </button>
                 </td>
               </tr>
             ))}
