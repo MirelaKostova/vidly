@@ -1,5 +1,7 @@
 import React, { Component } from "react";
 import { getMovies } from "../Starter Code/services/fakeMovieService";
+import "../../node_modules/font-awesome/css/font-awesome.css";
+import Like from "./common/like";
 
 class Movies extends Component {
   state = {
@@ -13,12 +15,26 @@ class Movies extends Component {
     this.setState({ movies });
   };
 
+  handleLike = (movie) => {
+    const movies = [...this.state.movies];
+    const index = movies.indexOf(movie);
+
+    movies[index] = { ...movies[index] };
+    movies[index] = !movie[index];
+
+    this.setState({ movies });
+  };
+
   render() {
     const { length: count } = this.state.movies;
-    if (count === 0) return <p>There are no movies in the database.</p>;
+    if (count === 0)
+      return <p className="fw-bold">There are no movies in the database.</p>;
     return (
       <>
-        <p>There are {count} movies in the database.</p>
+        <p className="fw-bold">
+          There are <span className="text-danger">{count}</span> movies in the
+          database.
+        </p>
         <table className="table">
           <thead>
             <tr>
@@ -26,7 +42,8 @@ class Movies extends Component {
               <th>Genre</th>
               <th>Stock</th>
               <th>Rate</th>
-              <th></th>
+              <th />
+              <th />
             </tr>
           </thead>
 
@@ -37,6 +54,13 @@ class Movies extends Component {
                 <td>{movie.genre.name}</td>
                 <td>{movie.numberInStock}</td>
                 <td>{movie.dailyRentalRate}</td>
+                <td>
+                  <Like
+                    liked={this.liked}
+                    onClick={() => this.handleLike(movie)}
+                  />
+                </td>
+
                 <td>
                   <button
                     onClick={() => this.handleDelete(movie)}
