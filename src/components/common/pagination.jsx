@@ -6,19 +6,15 @@ const Pagination = ({ itemsCount, pageSize }) => {
     <nav>
       <ul className="pagination">
         <li className={classes} onClick={onClick}>
-          <a className="page-link" href="#">
-            1
-          </a>
+          <a className="page-link">1</a>
         </li>
         <li className={classes} onClick={onClick}>
-          <a className="page-link" href="#">
+          <a className="page-link">
             2 <span className="sr-only">(current)</span>
           </a>
         </li>
         <li className={classes} onClick={onClick}>
-          <a className="page-link" href="#">
-            3
-          </a>
+          <a className="page-link">3</a>
         </li>
       </ul>
     </nav>
