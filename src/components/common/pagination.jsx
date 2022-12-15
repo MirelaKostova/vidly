@@ -1,21 +1,29 @@
-const Pagination = ({ itemsCount, pageSize }) => {
-  const pagesCount = itemsCount / pageSize;
-  let classes = selected ? "page-item active" : "page-item";
+import _ from "lodash";
+
+const Pagination = ({ itemsCount, itemsToShow, currentPage, onPageChange }) => {
+  const pagesCount = Math.ceil(itemsCount / itemsToShow);
+  if (pagesCount === 1) return null;
+  const pages = _.range(1, pagesCount + 1);
+
+  // {
+  //   console.log("itemsCount ->", itemsCount);
+
+  //   console.log("pages ->", pages);
+  // }
 
   return (
     <nav>
       <ul className="pagination">
-        <li className={classes} onClick={onClick}>
-          <a className="page-link">1</a>
-        </li>
-        <li className={classes} onClick={onClick}>
-          <a className="page-link">
-            2 <span className="sr-only">(current)</span>
-          </a>
-        </li>
-        <li className={classes} onClick={onClick}>
-          <a className="page-link">3</a>
-        </li>
+        {pages.map((page) => (
+          <li
+            key={page}
+            className={page === currentPage ? "page-item active" : "page-item"}
+          >
+            <button onClick={() => onPageChange(page)} className="page-link">
+              {page}
+            </button>
+          </li>
+        ))}
       </ul>
     </nav>
   );

@@ -2,7 +2,7 @@
 // Output: onClick
 
 const Like = ({ status, onClick }) => {
-  console.log("Like component status -> ", status);
+  // console.log("Like component status -> ", status);
   let classes = status ? "fa fa-heart" : "fa fa-heart-o";
   return (
     <i

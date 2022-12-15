@@ -7,7 +7,8 @@ import Pagination from "./common/pagination";
 class Movies extends Component {
   state = {
     movies: getMovies(),
-    pageSize: 4,
+    itemsToShow: 4,
+    currentPage: 1,
   };
 
   handleDelete = (movie) => {
@@ -28,11 +29,14 @@ class Movies extends Component {
   };
 
   handlePageChange = (page) => {
-    console.log(page);
+    // console.log("page->", page);
+    this.setState({ currentPage: page });
   };
 
   render() {
     const { length: count } = this.state.movies;
+    const { currentPage, itemsToShow } = this.state;
+
     if (count === 0)
       return <p className="fw-bold">There are no movies in the database.</p>;
     return (
@@ -81,10 +85,11 @@ class Movies extends Component {
         </table>
 
         <Pagination
-          itemCount={count}
-          totalPages={this.state.pageSize}
-          selected={this.selected}
-          onPageChange={() => this.handlePageChange}
+          itemsCount={count}
+          itemsToShow={itemsToShow}
+          currentPage={currentPage}
+          // selected={this.selected}
+          onPageChange={this.handlePageChange}
         />
       </>
     );
