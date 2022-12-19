@@ -3,7 +3,7 @@ import { getMovies } from "../Starter Code/services/fakeMovieService";
 import "../../node_modules/font-awesome/css/font-awesome.css";
 import Like from "./common/like";
 import Pagination from "./common/pagination";
-import { paginate } from "../utils/paginate";
+import paginate from "../utils/paginate";
 
 class Movies extends Component {
   state = {
@@ -41,9 +41,6 @@ class Movies extends Component {
       return <p className="fw-bold">There are no movies in the database.</p>;
 
     const movies = paginate(allMovies, currentPage, itemsToShow);
-    // console.log("allMovies->", allMovies);
-    // console.log("currentPage->", currentPage);
-    // console.log("itemsToShow->", itemsToShow);
 
     return (
       <>
