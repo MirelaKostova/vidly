@@ -1,6 +1,5 @@
-# Getting Started with Create React App
-
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# Vidly - My First React Project
+From "Mastering React" course by Mosh Hamedani -> https://codewithmosh.com/p/mastering-react
 
 ## Available Scripts
 
