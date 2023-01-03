@@ -5,10 +5,12 @@ import Like from "./common/like";
 import Pagination from "./common/pagination";
 import paginate from "../utils/paginate";
 import List from "./common/list";
+import { getGenres } from "../services/fakeGenreService";
 
 class Movies extends Component {
   state = {
     movies: getMovies(),
+    genres: getGenres(),
     itemsToShow: 4,
     currentPage: 1,
   };
