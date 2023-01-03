@@ -1,19 +1,23 @@
 import React, { Component } from "react";
 import { getMovies } from "../services/fakeMovieService";
+import { getGenres } from "../services/fakeGenreService";
 import "../../node_modules/font-awesome/css/font-awesome.css";
 import Like from "./common/like";
 import Pagination from "./common/pagination";
 import paginate from "../utils/paginate";
-import List from "./common/list";
-import { getGenres } from "../services/fakeGenreService";
+import ListGroup from "./common/listGroup";
 
 class Movies extends Component {
   state = {
-    movies: getMovies(),
-    genres: getGenres(),
+    movies: [],
+    genres: [],
     itemsToShow: 4,
     currentPage: 1,
   };
+
+  componentDidMount() {
+    this.setState({ movies: getMovies(), genres: getGenres() });
+  }
 
   handleDelete = (movie) => {
     const movies = this.state.movies.filter(
@@ -36,7 +40,9 @@ class Movies extends Component {
     this.setState({ currentPage: page });
   };
 
-  handleGenreSort = (movieObj, currGenreId) => {
+  handleGenreSelect = (genre, currGenreId) => {
+    console.log(genre);
+
     const movies = [...this.state.movies];
     const filteredMovies = movies.filter((el) => el.genre._id === currGenreId);
 
@@ -53,66 +59,67 @@ class Movies extends Component {
     const movies = paginate(allMovies, currentPage, itemsToShow);
 
     return (
-      <>
-        <div className="main-wrapper d-flex m-3">
-          <List onClick={() => this.handleGenreSort()} />
-          <>
-            <div className="table-wrapper mx-3">
-              <p className="fw-bold">
-                There are <span className="text-danger">{count}</span> movies in
-                the database.
-              </p>
-              <hr className="hr" />
-              <table className="table">
-                <thead>
-                  <tr>
-                    <th>Title</th>
-                    <th>Genre</th>
-                    <th>Stock</th>
-                    <th>Rate</th>
-                    <th />
-                    <th />
+      <div className="main-wrapper">
+        <div className="d-flex m-3 ">
+          <ListGroup
+            items={this.state.genres}
+            onClick={() => this.handleGenreSelect}
+          />
+
+          <div className="table-wrapper mx-3">
+            <p className="fw-bold">
+              There are <span className="text-danger">{count}</span> movies in
+              the database.
+            </p>
+            <hr className="hr" />
+            <table className="table">
+              <thead>
+                <tr>
+                  <th>Title</th>
+                  <th>Genre</th>
+                  <th>Stock</th>
+                  <th>Rate</th>
+                  <th />
+                  <th />
+                </tr>
+              </thead>
+
+              <tbody>
+                {movies.map((movie) => (
+                  <tr key={movie._id}>
+                    <td>{movie.title}</td>
+                    <td>{movie.genre.name}</td>
+                    <td>{movie.numberInStock}</td>
+                    <td>{movie.dailyRentalRate}</td>
+                    <td>
+                      <Like
+                        status={movie.liked}
+                        onClick={() => this.handleLike(movie)}
+                      />
+                    </td>
+
+                    <td>
+                      <button
+                        onClick={() => this.handleDelete(movie)}
+                        className="btn btn-danger btn-sm"
+                      >
+                        Delete
+                      </button>
+                    </td>
                   </tr>
-                </thead>
+                ))}
+              </tbody>
+            </table>
 
-                <tbody>
-                  {movies.map((movie) => (
-                    <tr key={movie._id}>
-                      <td>{movie.title}</td>
-                      <td>{movie.genre.name}</td>
-                      <td>{movie.numberInStock}</td>
-                      <td>{movie.dailyRentalRate}</td>
-                      <td>
-                        <Like
-                          status={movie.liked}
-                          onClick={() => this.handleLike(movie)}
-                        />
-                      </td>
-
-                      <td>
-                        <button
-                          onClick={() => this.handleDelete(movie)}
-                          className="btn btn-danger btn-sm"
-                        >
-                          Delete
-                        </button>
-                      </td>
-                    </tr>
-                  ))}
-                </tbody>
-              </table>
-
-              <Pagination
-                itemsCount={count}
-                itemsToShow={itemsToShow}
-                currentPage={currentPage}
-                // selected={this.selected}
-                onPageChange={this.handlePageChange}
-              />
-            </div>
-          </>
+            <Pagination
+              itemsCount={count}
+              itemsToShow={itemsToShow}
+              currentPage={currentPage}
+              onPageChange={this.handlePageChange}
+            />
+          </div>
         </div>
-      </>
+      </div>
     );
   }
 }
