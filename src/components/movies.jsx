@@ -16,7 +16,8 @@ class Movies extends Component {
   };
 
   componentDidMount() {
-    this.setState({ movies: getMovies(), selectedGenre, genres: getGenres() });
+    const genres = [{ name: "All Genres" }, ...getGenres()];
+    this.setState({ movies: getMovies(), genres });
   }
 
   handleDelete = (movie) => {
@@ -41,19 +42,25 @@ class Movies extends Component {
   };
 
   handleGenreSelect = (genre) => {
-    this.setState({ selectedGenre: genre });
+    this.setState({ selectedGenre: genre, currentPage: 1 });
   };
 
   render() {
     const { length: count } = this.state.movies;
-    const { currentPage, itemsToShow, movies: allMovies } = this.state;
+    const {
+      currentPage,
+      itemsToShow,
+      selectedGenre,
+      movies: allMovies,
+    } = this.state;
 
     if (count === 0)
       return <p className="fw-bold">There are no movies in the database.</p>;
 
-    const filteredMovies = selectedGenre
-      ? movies.filter((movie) => movie.genre._id === selectedGenre._id)
-      : movies;
+    const filteredMovies =
+      selectedGenre && selectedGenre._id
+        ? allMovies.filter((movie) => movie.genre._id === selectedGenre._id)
+        : allMovies;
 
     const movies = paginate(filteredMovies, currentPage, itemsToShow);
 
@@ -68,8 +75,9 @@ class Movies extends Component {
 
           <div className="table-wrapper mx-3">
             <p className="fw-bold">
-              There are <span className="text-danger">{count}</span> movies in
-              the database.
+              There are{" "}
+              <span className="text-danger">{filteredMovies.length}</span>{" "}
+              movies in the database.
             </p>
             <hr className="hr" />
             <table className="table">
@@ -112,7 +120,7 @@ class Movies extends Component {
             </table>
 
             <Pagination
-              itemsCount={count}
+              itemsCount={filteredMovies.length}
               itemsToShow={itemsToShow}
               currentPage={currentPage}
               onPageChange={this.handlePageChange}

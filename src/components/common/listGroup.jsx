@@ -4,13 +4,13 @@ const ListGroup = (props) => {
 
   return (
     <ul className="list-group">
-      {/* <li className="list-group-item active">All Generes</li> */}
       {items.map((item) => (
         <li
+          key={item[idProperty]}
+          style={{ cursor: "pointer" }}
           onClick={() => {
             onGenreSelect(item);
           }}
-          key={item[idProperty]}
           className={
             item === selectedGenre
               ? "list-group-item active"
