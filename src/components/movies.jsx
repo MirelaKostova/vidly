@@ -40,13 +40,13 @@ class Movies extends Component {
     this.setState({ currentPage: page });
   };
 
-  handleGenreSelect = (genre, currGenreId) => {
-    console.log(genre);
+  handleGenreSelect = (genre) => {
+    this.setState({ selectedGenre: genre });
 
-    const movies = [...this.state.movies];
-    const filteredMovies = movies.filter((el) => el.genre._id === currGenreId);
+    // const movies = [...this.state.movies];
+    // const filteredMovies = movies.filter((el) => el.genre._id === currGenreId);
 
-    this.setState({ movies: filteredMovies });
+    // this.setState({ movies: filteredMovies });
   };
 
   render() {
@@ -63,7 +63,8 @@ class Movies extends Component {
         <div className="d-flex m-3 ">
           <ListGroup
             items={this.state.genres}
-            onClick={() => this.handleGenreSelect}
+            selectedGenre={this.state.selectedGenre}
+            onGenreSelect={this.handleGenreSelect}
           />
 
           <div className="table-wrapper mx-3">
