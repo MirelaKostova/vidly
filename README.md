@@ -14,7 +14,9 @@ From "Mastering React" course by Mosh Hamedani -> https://codewithmosh.com/p/mas
 - Authentification & Authorization
 - Deployment
 
-### `npm start`
+## Run Project in local
+#### `npm install`
+#### `npm start`
 
-Runs the app in the development mode.\
+Runs the app in the development mode.
 Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
