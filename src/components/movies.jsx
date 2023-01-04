@@ -66,21 +66,8 @@ class Movies extends Component {
     if (count === 0)
       return <p className="fw-bold">There are no movies in the database.</p>;
 
-    // const filteredMovies =
-    //   selectedGenre && selectedGenre._id
-    //     ? allMovies.filter((movie) => movie.genre._id === selectedGenre._id)
-    //     : allMovies;
-
     const filteredMovies = filter(selectedGenre, allMovies);
-
-    // const sortedMovies = _.orderBy(
-    //   filteredMovies,
-    //   [sortColumn.path],
-    //   [sortColumn.order]
-    // );
-
     const sortedMovies = sort(filteredMovies, sortColumn);
-
     const movies = paginate(sortedMovies, currentPage, itemsToShow);
 
     return (
