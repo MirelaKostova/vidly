@@ -5,6 +5,8 @@ import "../../node_modules/font-awesome/css/font-awesome.css";
 import MoviesTable from "./moviesTable";
 import Pagination from "./common/pagination";
 import paginate from "../utils/paginate";
+import filter from "../utils/filter";
+import sort from "../utils/sort";
 import ListGroup from "./common/listGroup";
 
 class Movies extends Component {
@@ -13,6 +15,7 @@ class Movies extends Component {
     genres: [],
     itemsToShow: 4,
     currentPage: 1,
+    sortColumn: { path: "title", order: "asc" },
   };
 
   componentDidMount() {
@@ -46,7 +49,8 @@ class Movies extends Component {
   };
 
   handleSort = (path) => {
-    console.log(path);
+    this.setState({ sortColumn: { path, order: "asc" } });
+    // console.log(this.state.sortColumn);
   };
 
   render() {
@@ -54,6 +58,7 @@ class Movies extends Component {
     const {
       currentPage,
       itemsToShow,
+      sortColumn,
       selectedGenre,
       movies: allMovies,
     } = this.state;
@@ -61,12 +66,22 @@ class Movies extends Component {
     if (count === 0)
       return <p className="fw-bold">There are no movies in the database.</p>;
 
-    const filteredMovies =
-      selectedGenre && selectedGenre._id
-        ? allMovies.filter((movie) => movie.genre._id === selectedGenre._id)
-        : allMovies;
+    // const filteredMovies =
+    //   selectedGenre && selectedGenre._id
+    //     ? allMovies.filter((movie) => movie.genre._id === selectedGenre._id)
+    //     : allMovies;
 
-    const movies = paginate(filteredMovies, currentPage, itemsToShow);
+    const filteredMovies = filter(selectedGenre, allMovies);
+
+    // const sortedMovies = _.orderBy(
+    //   filteredMovies,
+    //   [sortColumn.path],
+    //   [sortColumn.order]
+    // );
+
+    const sortedMovies = sort(filteredMovies, sortColumn);
+
+    const movies = paginate(sortedMovies, currentPage, itemsToShow);
 
     return (
       <div className="main-wrapper">
