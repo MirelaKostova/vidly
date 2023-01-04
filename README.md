@@ -1,5 +1,5 @@
 # Vidly
-* My First React App Project *
+*My First React App Project*
 
 ## Description 
 A React App to display, filter, like and delete movies in the database.
