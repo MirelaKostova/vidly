@@ -2,12 +2,13 @@ import React, { Component } from "react";
 import { getMovies } from "../services/fakeMovieService";
 import { getGenres } from "../services/fakeGenreService";
 import "../../node_modules/font-awesome/css/font-awesome.css";
+import ListGroup from "./common/listGroup";
+import Message from "./message";
 import MoviesTable from "./moviesTable";
 import Pagination from "./common/pagination";
 import paginate from "../utils/paginate";
 import filter from "../utils/filter";
 import sort from "../utils/sort";
-import ListGroup from "./common/listGroup";
 
 class Movies extends Component {
   state = {
@@ -88,11 +89,7 @@ class Movies extends Component {
           />
 
           <div className="table-wrapper mx-3">
-            <p className="fw-bold">
-              There are{" "}
-              <span className="text-danger">{filteredMovies.length}</span>{" "}
-              movies in the database.
-            </p>
+            <Message filteredMovies={filteredMovies} />
 
             <MoviesTable
               movies={movies}
