@@ -49,15 +49,15 @@ class Movies extends Component {
     this.setState({ selectedGenre: genre, currentPage: 1 });
   };
 
-  handleSort = (path) => {
-    const sortColumn = { ...this.state.sortColumn };
+  handleSort = (sortColumn) => {
+    // const sortColumn = { ...this.state.sortColumn };
 
-    if (sortColumn.path === path) {
-      sortColumn.order = sortColumn.order === "asc" ? "desc" : "asc";
-    } else {
-      sortColumn.path = path;
-      sortColumn.order = "asc";
-    }
+    // if (sortColumn.path === path) {
+    //   sortColumn.order = sortColumn.order === "asc" ? "desc" : "asc";
+    // } else {
+    //   sortColumn.path = path;
+    //   sortColumn.order = "asc";
+    // }
 
     this.setState({ sortColumn });
   };
@@ -87,17 +87,16 @@ class Movies extends Component {
             selectedGenre={this.state.selectedGenre}
             onGenreSelect={this.handleGenreSelect}
           />
-
           <div className="table-wrapper mx-3">
             <Message filteredMovies={filteredMovies} />
 
             <MoviesTable
               movies={movies}
+              sortColumn={sortColumn}
               onLike={this.handleLike}
               onDelete={this.handleDelete}
               onSort={this.handleSort}
             />
-
             <Pagination
               itemsCount={filteredMovies.length}
               itemsToShow={itemsToShow}

@@ -1,16 +1,28 @@
 import Like from "./common/like";
 
-const MoviesTable = ({ movies, onLike, onDelete, onSort }) => {
+const MoviesTable = ({ movies, sortColumn, onLike, onDelete, onSort }) => {
+  const raiseSort = (path) => {
+    const sortColumnCopy = { ...sortColumn };
+
+    if (sortColumnCopy.path === path) {
+      sortColumnCopy.order = sortColumnCopy.order === "asc" ? "desc" : "asc";
+    } else {
+      sortColumnCopy.path = path;
+      sortColumnCopy.order = "asc";
+    }
+    return onSort(sortColumnCopy);
+  };
+
   return (
     <>
       <hr className="hr" />
       <table className="table">
         <thead>
           <tr>
-            <th onClick={() => onSort("title")}>Title</th>
-            <th onClick={() => onSort("genre.name")}>Genre</th>
-            <th onClick={() => onSort("numberInStock")}>Stock</th>
-            <th onClick={() => onSort("dailyRentalRate")}>Rate</th>
+            <th onClick={() => raiseSort("title")}>Title</th>
+            <th onClick={() => raiseSort("genre.name")}>Genre</th>
+            <th onClick={() => raiseSort("numberInStock")}>Stock</th>
+            <th onClick={() => raiseSort("dailyRentalRate")}>Rate</th>
             <th />
             <th />
           </tr>
