@@ -1,7 +1,8 @@
-import Like from "./common/like";
+import TableBody from "./common/tableBody";
 import TableHeader from "./common/tableHeader";
 
 const MoviesTable = ({ movies, sortColumn, onLike, onDelete, onSort }) => {
+  // console.log(movies);
   const columns = [
     { path: "title", label: "Title" },
     { path: "genre.name", label: "Genre" },
@@ -21,6 +22,8 @@ const MoviesTable = ({ movies, sortColumn, onLike, onDelete, onSort }) => {
           onSort={onSort}
         />
 
+        <TableBody movies={movies} onLike={onLike} onDelete={onDelete} />
+        {/* 
         <tbody>
           {movies.map((movie) => (
             <tr key={movie._id}>
@@ -42,7 +45,7 @@ const MoviesTable = ({ movies, sortColumn, onLike, onDelete, onSort }) => {
               </td>
             </tr>
           ))}
-        </tbody>
+        </tbody> */}
       </table>
     </>
   );
