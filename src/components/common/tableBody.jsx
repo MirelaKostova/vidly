@@ -7,11 +7,10 @@ const TableBody = ({ columns, data, onLike, onDelete }) => {
 
   return (
     <tbody>
-      {/* {console.log("data->", data)} */}
-      {data.map((item) => {
-        <tr key={item._id}>
-          {columns.map((column) => (
-            <td key={column.label}>{_.get(item, column.path)}</td>
+      {data.map((item, index) => (
+        <tr key={index}>
+          {columns.map((column, index) => (
+            <td key={index}>{_.get(item, column.path)}</td>
           ))}
           <td>
             <Like status={item.liked} onClick={() => onLike(item)} />
@@ -24,26 +23,17 @@ const TableBody = ({ columns, data, onLike, onDelete }) => {
               Delete
             </button>
           </td>
-        </tr>;
-      })}
+        </tr>
+      ))}
       {/* {data.map((item) => (
         <tr key={item._id}>
           <td>{item.title}</td>
           <td>{item.genre.name}</td>
           <td>{item.numberInStock}</td>
           <td>{item.dailyRentalRate}</td>
-          <td>
-            <Like status={item.liked} onClick={() => onLike(item)} />
-          </td>
+         
 
-          <td>
-            <button
-              onClick={() => onDelete(item)}
-              className="btn btn-danger btn-sm"
-            >
-              Delete
-            </button>
-          </td>
+         
         </tr>
       ))} */}
     </tbody>
