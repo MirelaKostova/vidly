@@ -23,8 +23,8 @@ const MoviesTable = ({ movies, sortColumn, onLike, onDelete, onSort }) => {
         />
 
         <TableBody
-          data={movies}
           columns={columns}
+          data={movies}
           onLike={onLike}
           onDelete={onDelete}
         />
