@@ -22,7 +22,12 @@ const MoviesTable = ({ movies, sortColumn, onLike, onDelete, onSort }) => {
           onSort={onSort}
         />
 
-        <TableBody movies={movies} onLike={onLike} onDelete={onDelete} />
+        <TableBody
+          data={movies}
+          columns={columns}
+          onLike={onLike}
+          onDelete={onDelete}
+        />
         {/* 
         <tbody>
           {movies.map((movie) => (

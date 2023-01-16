@@ -1,16 +1,16 @@
 import Like from "./like";
 
-const TableBody = ({ movies, onLike, onDelete }) => {
+const TableBody = ({ data, onLike, onDelete }) => {
   //   console.log("movies->", movies);
 
   return (
     <tbody>
-      {movies.map((movie) => (
-        <tr key={movie._id}>
-          <td>{movie.title}</td>
-          <td>{movie.genre.name}</td>
-          <td>{movie.numberInStock}</td>
-          <td>{movie.dailyRentalRate}</td>
+      {/* {data.map((item) => (
+        <tr key={item._id}>
+          <td>{item.title}</td>
+          <td>{item.genre.name}</td>
+          <td>{item.numberInStock}</td>
+          <td>{item.dailyRentalRate}</td>
           <td>
             <Like status={movie.liked} onClick={() => onLike(movie)} />
           </td>
@@ -24,7 +24,7 @@ const TableBody = ({ movies, onLike, onDelete }) => {
             </button>
           </td>
         </tr>
-      ))}
+      ))} */}
     </tbody>
   );
 };
