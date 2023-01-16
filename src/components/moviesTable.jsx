@@ -1,15 +1,30 @@
 import TableBody from "./common/tableBody";
 import TableHeader from "./common/tableHeader";
+import Like from "./common/like";
 
 const MoviesTable = ({ movies, sortColumn, onLike, onDelete, onSort }) => {
-  // console.log(movies);
   const columns = [
     { path: "title", label: "Title" },
     { path: "genre.name", label: "Genre" },
     { path: "numberInStock", label: "Stock" },
     { path: "dailyRentalRate", label: "Rate" },
-    { key: "like" },
-    { key: "delete" },
+    {
+      key: "like",
+      content: (currMovie) => (
+        <Like status={currMovie.liked} onClick={() => onLike(currMovie)} />
+      ),
+    },
+    {
+      key: "delete",
+      content: (currMovie) => (
+        <button
+          onClick={() => onDelete(currMovie)}
+          className="btn btn-danger btn-sm"
+        >
+          Delete
+        </button>
+      ),
+    },
   ];
 
   return (
