@@ -8,12 +8,16 @@ const TableBody = ({ columns, data }) => {
     return _.get(item, column.path);
   };
 
+  const createKey = (item, column) => {
+    return item.id + (column.path || column.key);
+  };
+
   return (
     <tbody>
-      {data.map((item, index) => (
-        <tr key={index}>
-          {columns.map((column, index) => (
-            <td key={index}>{renderCell(item, column)}</td>
+      {data.map((item) => (
+        <tr key={item._id}>
+          {columns.map((column) => (
+            <td key={createKey(item, column)}>{renderCell(item, column)}</td>
           ))}
         </tr>
       ))}
