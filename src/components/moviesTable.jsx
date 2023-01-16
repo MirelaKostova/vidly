@@ -43,29 +43,6 @@ const MoviesTable = ({ movies, sortColumn, onLike, onDelete, onSort }) => {
           onLike={onLike}
           onDelete={onDelete}
         />
-        {/* 
-        <tbody>
-          {movies.map((movie) => (
-            <tr key={movie._id}>
-              <td>{movie.title}</td>
-              <td>{movie.genre.name}</td>
-              <td>{movie.numberInStock}</td>
-              <td>{movie.dailyRentalRate}</td>
-              <td>
-                <Like status={movie.liked} onClick={() => onLike(movie)} />
-              </td>
-
-              <td>
-                <button
-                  onClick={() => onDelete(movie)}
-                  className="btn btn-danger btn-sm"
-                >
-                  Delete
-                </button>
-              </td>
-            </tr>
-          ))}
-        </tbody> */}
       </table>
     </>
   );

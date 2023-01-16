@@ -1,7 +1,10 @@
-const ListGroup = (props) => {
-  const { items, selectedGenre, textProperty, idProperty, onGenreSelect } =
-    props;
-
+const ListGroup = ({
+  items,
+  selectedGenre,
+  onGenreSelect,
+  textProperty,
+  idProperty,
+}) => {
   return (
     <ul className="list-group">
       {items.map((item, index) => (
@@ -9,10 +12,10 @@ const ListGroup = (props) => {
           key={item[idProperty]}
           style={{ cursor: "pointer" }}
           onClick={() => {
-            onGenreSelect(index);
+            onGenreSelect(item);
           }}
           className={
-            index === selectedGenre
+            item.name === selectedGenre.name
               ? "list-group-item active"
               : "list-group-item"
           }
