@@ -7,17 +7,16 @@ const ListGroup = ({
 }) => {
   return (
     <ul className="list-group">
-      {items.map((item, index) => (
+      {items.map((item) => (
         <li
           key={item[idProperty]}
-          style={{ cursor: "pointer" }}
           onClick={() => {
             onGenreSelect(item);
           }}
           className={
-            item.name === selectedGenre.name
-              ? "list-group-item active"
-              : "list-group-item"
+            item.name === selectedGenre.name || selectedGenre.idProperty === ""
+              ? "list-group-item clickable active"
+              : "list-group-item clickable"
           }
         >
           {item[textProperty]}

@@ -11,16 +11,22 @@ const TableHeader = ({ columns, sortColumn, onSort }) => {
     return onSort(sortColumnCopy);
   };
 
+  const renderSortIcon = (column) => {
+    if (column.path !== sortColumn.path) return null;
+    if (sortColumn.order === "asc") return <i className="fa fa-sort-up"></i>;
+    return <i className="fa fa-sort-down"></i>;
+  };
+
   return (
     <thead>
       <tr>
         {columns.map((column) => (
           <th
+            className="clickable"
             key={column.path || column.key}
             onClick={() => raiseSort(column.path)}
-            style={{ cursor: "pointer" }}
           >
-            {column.label}
+            {column.label} {renderSortIcon(column)}
           </th>
         ))}
       </tr>
