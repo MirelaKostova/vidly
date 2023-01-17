@@ -10,18 +10,20 @@ import paginate from "../utils/paginate";
 import filter from "../utils/filter";
 import sort from "../utils/sort";
 
+const defaultGenreValue = { _id: "", name: "All Genres" };
+
 class Movies extends Component {
   state = {
     movies: [],
     genres: [],
     itemsToShow: 4,
     currentPage: 1,
-    selectedGenre: "",
+    selectedGenre: defaultGenreValue,
     sortColumn: { path: "title", order: "asc" },
   };
 
   componentDidMount() {
-    const genres = [{ _id: "", name: "All Genres" }, ...getGenres()];
+    const genres = [defaultGenreValue, ...getGenres()];
     this.setState({ movies: getMovies(), genres });
   }
 
