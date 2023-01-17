@@ -1,6 +1,5 @@
-import TableBody from "./common/tableBody";
-import TableHeader from "./common/tableHeader";
 import Like from "./common/like";
+import Table from "./common/table";
 
 const MoviesTable = ({ movies, sortColumn, onLike, onDelete, onSort }) => {
   const columns = [
@@ -28,23 +27,12 @@ const MoviesTable = ({ movies, sortColumn, onLike, onDelete, onSort }) => {
   ];
 
   return (
-    <>
-      <hr className="hr" />
-      <table className="table">
-        <TableHeader
-          columns={columns}
-          sortColumn={sortColumn}
-          onSort={onSort}
-        />
-
-        <TableBody
-          columns={columns}
-          data={movies}
-          onLike={onLike}
-          onDelete={onDelete}
-        />
-      </table>
-    </>
+    <Table
+      columns={columns}
+      data={movies}
+      sortColumn={sortColumn}
+      onSort={onSort}
+    />
   );
 };
 
