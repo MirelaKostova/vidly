@@ -27,6 +27,26 @@ class Movies extends Component {
     this.setState({ movies: getMovies(), genres });
   }
 
+  getPageData() {
+    const {
+      currentPage,
+      itemsToShow,
+      sortColumn,
+      selectedGenre,
+      movies: allMovies,
+    } = this.state;
+
+    const filteredMovies = filter(selectedGenre, allMovies);
+    const sortedMovies = sort(filteredMovies, sortColumn);
+    const movies = paginate(sortedMovies, currentPage, itemsToShow);
+
+    return {
+      totalCount: filteredMovies.length,
+      data: movies,
+      filteredMovies: filteredMovies,
+    };
+  }
+
   handleDelete = (movie) => {
     const movies = this.state.movies.filter(
       (currMovie) => currMovie._id !== movie._id
@@ -66,19 +86,17 @@ class Movies extends Component {
       movies: allMovies,
     } = this.state;
 
+    const { totalCount, data: movies, filteredMovies } = this.getPageData();
+
     if (count === 0)
       return <p className="fw-bold">There are no movies in the database.</p>;
-
-    const filteredMovies = filter(selectedGenre, allMovies);
-    const sortedMovies = sort(filteredMovies, sortColumn);
-    const movies = paginate(sortedMovies, currentPage, itemsToShow);
 
     return (
       <div className="main-wrapper">
         <div className="d-flex m-3 ">
           <ListGroup
             items={this.state.genres}
-            selectedGenre={this.state.selectedGenre}
+            selectedGenre={selectedGenre}
             onGenreSelect={this.handleGenreSelect}
           />
           <div className="table-wrapper mx-3">
@@ -92,7 +110,7 @@ class Movies extends Component {
               onSort={this.handleSort}
             />
             <Pagination
-              itemsCount={filteredMovies.length}
+              itemsCount={totalCount}
               itemsToShow={itemsToShow}
               currentPage={currentPage}
               onPageChange={this.handlePageChange}
