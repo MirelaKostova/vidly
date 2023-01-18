@@ -2,8 +2,8 @@
 // Output: onClick
 
 const Like = ({ status, onClick }) => {
-  // console.log("Like component status -> ", status);
-  let classes = status ? "fa fa-heart" : "fa fa-heart-o";
+  const initialClassName = "clickable fa fa-heart";
+  let classes = status ? initialClassName : initialClassName + "-o";
   return (
     <i
       style={{ cursor: "pointer" }}
