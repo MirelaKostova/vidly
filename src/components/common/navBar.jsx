@@ -7,7 +7,7 @@ const NavBar = () => {
         <Link
           style={{ fontWeight: "bold", color: "red" }}
           className="navbar-brand m-1"
-          to="/"
+          to="/movies"
         >
           VIDLY
         </Link>
