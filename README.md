@@ -12,7 +12,7 @@ From "Mastering React" course by Mosh Hamedani
 - Creating reusable react component
   -- Like, ListGroup, Pagination, Table
 
-For Example Like Component:
+Example:
 
 ```
 const Like = ({ status, onClick }) => {
@@ -34,7 +34,7 @@ export default Like;
 used:
 
 ```
- "font-awesome": "^4.7.0"
+ "font-awesome": "4.7.0"
 ```
 
 - Lifecycle hooks
