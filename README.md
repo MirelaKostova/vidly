@@ -12,7 +12,7 @@ From "Mastering React" course by Mosh Hamedani
 - Creating reusable react component
   -- Like, ListGroup, Pagination, Table
 
-Example:
+For Example Like Component:
 
 ```
 const Like = ({ status, onClick }) => {
@@ -29,11 +29,17 @@ const Like = ({ status, onClick }) => {
 };
 
 export default Like;
+```
 
+used:
+
+```
+ "font-awesome": "^4.7.0"
 ```
 
 - Lifecycle hooks
 - Paginating, filtering, sorting
+
 - Routing
 - Forms and their validation
 - Calling backends services - Axios used for this project
