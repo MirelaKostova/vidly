@@ -11,6 +11,27 @@ From "Mastering React" course by Mosh Hamedani
 
 - Creating reusable react component
   -- Like, ListGroup, Pagination, Table
+
+Example:
+
+```
+const Like = ({ status, onClick }) => {
+  const initialClassName = "fa fa-heart";
+  let classes = status ? initialClassName : initialClassName + "-o";
+  return (
+    <i
+      style={{ cursor: "pointer" }}
+      onClick={onClick}
+      className={classes}
+      aria-hidden="true"
+    />
+  );
+};
+
+export default Like;
+
+```
+
 - Lifecycle hooks
 - Paginating, filtering, sorting
 - Routing
