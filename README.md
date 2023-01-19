@@ -31,11 +31,11 @@ const Like = ({ status, onClick }) => {
 export default Like;
 ```
 
- "font-awesome": "4.7.0"
+"font-awesome": "4.7.0"
 
 - Lifecycle hooks
 - Paginating, filtering, sorting
-<img width="556" alt="Screenshot 2023-01-19 at 12 16 08" src="https://user-images.githubusercontent.com/106656146/213416429-f51aad89-272d-4817-be0f-72b365bfc8e1.png">
+  <img width="556" alt="Screenshot 2023-01-19 at 12 16 08" src="https://user-images.githubusercontent.com/106656146/213416429-f51aad89-272d-4817-be0f-72b365bfc8e1.png">
 
 - Routing
 - Forms and their validation
