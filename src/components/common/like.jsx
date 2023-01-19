@@ -1,8 +1,5 @@
-// Input: boolean
-// Output: onClick
-
 const Like = ({ status, onClick }) => {
-  const initialClassName = "clickable fa fa-heart";
+  const initialClassName = "fa fa-heart";
   let classes = status ? initialClassName : initialClassName + "-o";
   return (
     <i
