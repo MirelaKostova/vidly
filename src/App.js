@@ -5,6 +5,7 @@ import Rentals from "./components/rentals";
 import NotFound from "./components/notFound";
 import NavBar from "./components/common/navBar";
 import MovieForm from "./components/movieForm";
+import LoginForm from "./components/common/loginForm";
 import "./App.css";
 
 const App = () => {
@@ -14,6 +15,7 @@ const App = () => {
       <NavBar />
       <Routes>
         <Route path="/" render={() => navigate("/movies")} />
+        <Route path="/login" element={<LoginForm />} />
         <Route path="/movies" element={<Movies />} />
         <Route path="/movies/:id" element={<MovieForm />} />
         <Route path="/customers" element={<Customers />} />
