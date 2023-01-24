@@ -1,0 +1,26 @@
+.wrapper-container{
+ margin-inline: 10%;
+}
+
+.image-container {
+    width: 50%;
+    margin-left: 10%;
+}
+
+.login-container {    
+    margin: 20px;
+}
+
+
+/* 
+.form{
+    padding: 20px;
+} */
+
+p {
+    color: rgb(148, 143, 143);
+}
+
+.main-container {
+    background-image: linear-gradient(to top, #f3e7e9 30%, #e3eeff 99%, #e3eeff 40%);
+  }

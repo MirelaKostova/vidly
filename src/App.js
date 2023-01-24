@@ -6,24 +6,30 @@ import NotFound from "./components/notFound";
 import NavBar from "./components/common/navBar";
 import MovieForm from "./components/movieForm";
 import LoginForm from "./components/common/loginForm/loginForm";
+import Footer from "./components/common/Footer/footer";
+import Register from "./components/common/register";
 import "./App.css";
 
 const App = () => {
   const navigate = useNavigate();
   return (
-    <div className="main-container">
-      <NavBar />
-      <Routes>
-        <Route path="/" render={() => navigate("/movies")} />
-        <Route path="/login" element={<LoginForm />} />
-        <Route path="/movies" element={<Movies />} />
-        <Route path="/movies/:id" element={<MovieForm />} />
-        <Route path="/customers" element={<Customers />} />
-        <Route path="/rentals" element={<Rentals />} />
-        <Route path="/not-found" element={<NotFound />} />
-        <Route path="*" element={<NotFound />} />
-      </Routes>
-    </div>
+    <>
+      <div className="main-container">
+        <NavBar />
+        <Routes>
+          <Route path="/" render={() => navigate("/movies")} />
+          <Route path="/login" element={<LoginForm />} />
+          <Route path="/register" element={<Register />} />
+          <Route path="/movies" element={<Movies />} />
+          <Route path="/movies/:ißd" element={<MovieForm />} />
+          <Route path="/customers" element={<Customers />} />
+          <Route path="/rentals" element={<Rentals />} />
+          <Route path="/not-found" element={<NotFound />} />
+          <Route path="*" element={<NotFound />} />
+        </Routes>
+      </div>
+      <Footer />
+    </>
   );
 };
 

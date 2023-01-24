@@ -1,9 +1,14 @@
+import Illustration from "./media/illustration.svg";
+import { Link } from "react-router-dom";
+import "./loginForm.css";
+
 const LoginForm = () => {
   return (
-    <div className="login-container">
-      <div className="d-flex justify-content-center">
+    <div className="wrapper-container d-flex justify-content-center">
+      <div className="login-container ">
         <form>
-          <h1>Login</h1>
+          <h1>Welcome back</h1>
+          <p>Please enter your details</p>
           {/* <!-- Email input --> */}
           <div className="form-outline">
             <input type="email" id="form2Example1" className="form-control" />
@@ -57,23 +62,17 @@ const LoginForm = () => {
           {/* <!-- Register buttons --> */}
           <div className="text-center">
             <p>
-              Not a member? <a href="#!">Register</a>
+              Not a member? <Link to="/register">Register</Link>
             </p>
           </div>
         </form>
-        {/* <form>
-          <div className="form-group mb-4">
-            <label htmlFor="username">Username</label>
-            <input id="username" type="text" className="form-control" />
-          </div>
-          <div className="form-group">
-            <label htmlFor="password">Password</label>
-            <input id="password" type="text" className="form-control" />
-          </div>
-          <button type="button" class="btn btn-primary btn-block mb-4">
-            Sign in
-          </button>
-        </form> */}
+      </div>
+      <div className="image-container">
+        <img
+          className="illustration"
+          src={Illustration}
+          alt="login-illustration"
+        />
       </div>
     </div>
   );

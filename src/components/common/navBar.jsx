@@ -5,7 +5,7 @@ const NavBar = () => {
     <nav className="navbar navbar-expand-lg  bg-light">
       <div className="container-fluid">
         <Link
-          style={{ fontWeight: "bold", color: "red" }}
+          style={{ fontWeight: "bold", color: "#0275d8" }}
           className="navbar-brand m-1"
           to="/movies"
         >
