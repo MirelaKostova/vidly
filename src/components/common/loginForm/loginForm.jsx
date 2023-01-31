@@ -9,39 +9,36 @@ const LoginForm = () => {
         <form>
           <h1>Welcome back</h1>
           <p>Please enter your details</p>
-          {/* <!-- Email input --> */}
+
+          {/* Email input */}
           <div className="form-outline">
-            <input type="email" id="form2Example1" className="form-control" />
-            <label className="form-label" for="form2Example1">
+            <input type="email" id="emailForm" className="form-control" />
+            <label className="form-label" for="emailForm">
               Email address
             </label>
           </div>
 
-          {/* <!-- Password input --> */}
+          {/* Password input */}
           <div className="form-outline mb-4">
-            <input
-              type="password"
-              id="form2Example2"
-              className="form-control"
-            />
-            <label className="form-label" for="form2Example2">
+            <input type="password" id="pwdForm" className="form-control" />
+            <label className="form-label" for="pwdForm">
               Password
             </label>
           </div>
 
-          {/* <!-- 2 column grid layout for inline styling --> */}
+          {/* 2 column grid layout for inline styling */}
           <div className="row mb-4">
             <div className="col d-flex justify-content-center">
-              {/* <!-- Checkbox --> */}
+              {/* Checkbox */}
               <div className="form-check">
                 <input
                   className="form-check-input"
                   type="checkbox"
                   value=""
-                  id="form2Example31"
+                  id="checkbox"
                   checked
                 />
-                <label className="form-check-label" for="form2Example31">
+                <label className="form-check-label" for="checkbox">
                   {" "}
                   Remember me{" "}
                 </label>
@@ -49,17 +46,17 @@ const LoginForm = () => {
             </div>
 
             <div className="col">
-              {/* <!-- Simple link --> */}
+              {/* Simple link */}
               <a href="#!">Forgot password?</a>
             </div>
           </div>
 
-          {/* <!-- Submit button --> */}
+          {/* Submit button */}
           <button type="button" className="btn btn-primary btn-block mb-4">
             Sign in
           </button>
 
-          {/* <!-- Register buttons --> */}
+          {/* Register buttons */}
           <div className="text-center">
             <p>
               Not a member? <Link to="/register">Register</Link>
@@ -67,6 +64,8 @@ const LoginForm = () => {
           </div>
         </form>
       </div>
+
+      {/* Image */}
       <div className="image-container">
         <img
           className="illustration"
