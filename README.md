@@ -32,12 +32,10 @@ export default Like;
 ```
 
 - Lifecycle hooks
-- Paginating, filtering, sorting
+- Paginating, filtering, sortingß
 - Routing
-  <img width="534" alt="Screenshot 2023-01-19 at 20 33 31" src="https://user-images.githubusercontent.com/106656146/213530679-fdac6772-390d-42cb-97d4-745fb1c93400.png">
-
 - Forms and their validation
-<img width="1424" alt="Screenshot 2023-01-31 at 11 45 27" src="https://user-images.githubusercontent.com/106656146/215725345-8cf49c07-a4a3-451f-bd7a-c0c6636a2fe2.png">
+  <img width="1424" alt="Screenshot 2023-01-31 at 11 45 27" src="https://user-images.githubusercontent.com/106656146/215725345-8cf49c07-a4a3-451f-bd7a-c0c6636a2fe2.png">
 
 - Calling backends services - Axios used for this project
 - Authentification & Authorization
