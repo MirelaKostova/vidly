@@ -31,8 +31,6 @@ const Like = ({ status, onClick }) => {
 export default Like;
 ```
 
-"font-awesome": "4.7.0"
-
 - Lifecycle hooks
 - Paginating, filtering, sorting
   <img width="556" alt="Screenshot 2023-01-19 at 12 16 08" src="https://user-images.githubusercontent.com/106656146/213416429-f51aad89-272d-4817-be0f-72b365bfc8e1.png">
@@ -41,6 +39,8 @@ export default Like;
   <img width="534" alt="Screenshot 2023-01-19 at 20 33 31" src="https://user-images.githubusercontent.com/106656146/213530679-fdac6772-390d-42cb-97d4-745fb1c93400.png">
 
 - Forms and their validation
+<img width="1424" alt="Screenshot 2023-01-31 at 11 45 27" src="https://user-images.githubusercontent.com/106656146/215725345-8cf49c07-a4a3-451f-bd7a-c0c6636a2fe2.png">
+
 - Calling backends services - Axios used for this project
 - Authentification & Authorization
 - Deployment
