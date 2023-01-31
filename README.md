@@ -32,7 +32,8 @@ export default Like;
 ```
 
 - Lifecycle hooks
-- Paginating, filtering, sortingß
+- Paginating, filtering, sorting
+
 - Routing
 - Forms and their validation
   <img width="1424" alt="Screenshot 2023-01-31 at 11 45 27" src="https://user-images.githubusercontent.com/106656146/215725345-8cf49c07-a4a3-451f-bd7a-c0c6636a2fe2.png">
