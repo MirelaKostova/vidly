@@ -1,11 +1,13 @@
-import Illustration from "./media/illustration.svg";
+import React from "react";
 import { Link } from "react-router-dom";
+import Illustration from "./media/illustration.svg";
 import "./loginForm.css";
 
 const LoginForm = () => {
-  const handleSubmit = (e) => {
-    console.log("Hello");
-  };
+  const [username, setUsername] = React.useState("");
+  const [password, setPassword] = React.useState("");
+
+  const handleSubmit = (e) => {};
 
   return (
     <div className="wrapper-container d-flex justify-content-center">
@@ -20,7 +22,9 @@ const LoginForm = () => {
               autoFocus
               type="email"
               id="emailForm"
+              value={username}
               className="form-control"
+              onChange={(e) => setUsername(e.target.value)}
             />
             <label className="form-label" htmlFor="emailForm">
               Email address
@@ -29,7 +33,13 @@ const LoginForm = () => {
 
           {/* Password input */}
           <div className="form-outline mb-4">
-            <input type="password" id="pwdForm" className="form-control" />
+            <input
+              type="password"
+              id="pwdForm"
+              value={password}
+              className="form-control"
+              onChange={(e) => setPassword(e.target.value)}
+            />
             <label className="form-label" htmlFor="pwdForm">
               Password
             </label>
