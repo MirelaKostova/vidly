@@ -16,7 +16,12 @@ const LoginForm = () => {
 
           {/* Email input */}
           <div className="form-outline">
-            <input type="email" id="emailForm" className="form-control" />
+            <input
+              autoFocus
+              type="email"
+              id="emailForm"
+              className="form-control"
+            />
             <label className="form-label" htmlFor="emailForm">
               Email address
             </label>
@@ -55,7 +60,11 @@ const LoginForm = () => {
           </div>
 
           {/* Submit button */}
-          <button type="button" className="btn btn-primary btn-block mb-4">
+          <button
+            type="button"
+            className="btn btn-primary btn-block mb-4"
+            onClick={handleSubmit}
+          >
             Sign in
           </button>
 
