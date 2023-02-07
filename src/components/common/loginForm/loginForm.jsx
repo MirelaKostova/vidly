@@ -3,17 +3,21 @@ import { Link } from "react-router-dom";
 import "./loginForm.css";
 
 const LoginForm = () => {
+  const handleSubmit = (e) => {
+    console.log("Hello");
+  };
+
   return (
     <div className="wrapper-container d-flex justify-content-center">
       <div className="login-container ">
-        <form>
+        <form onSubmit={handleSubmit}>
           <h1>Welcome back</h1>
           <p>Please enter your details</p>
 
           {/* Email input */}
           <div className="form-outline">
             <input type="email" id="emailForm" className="form-control" />
-            <label className="form-label" for="emailForm">
+            <label className="form-label" htmlFor="emailForm">
               Email address
             </label>
           </div>
@@ -21,7 +25,7 @@ const LoginForm = () => {
           {/* Password input */}
           <div className="form-outline mb-4">
             <input type="password" id="pwdForm" className="form-control" />
-            <label className="form-label" for="pwdForm">
+            <label className="form-label" htmlFor="pwdForm">
               Password
             </label>
           </div>
@@ -34,11 +38,10 @@ const LoginForm = () => {
                 <input
                   className="form-check-input"
                   type="checkbox"
-                  value=""
+                  value="onChecked"
                   id="checkbox"
-                  checked
                 />
-                <label className="form-check-label" for="checkbox">
+                <label className="form-check-label" htmlFor="checkbox">
                   {" "}
                   Remember me{" "}
                 </label>
