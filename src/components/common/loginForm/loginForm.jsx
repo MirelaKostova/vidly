@@ -1,9 +1,10 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { useState } from "react";
-import Joi from "joi-browser";
+import Joi from "joi";
 import Illustration from "./media/illustration.svg";
 import "./loginForm.css";
+import { zip } from "lodash";
 
 const LoginForm = () => {
   const [user, setUser] = useState({
@@ -13,17 +14,16 @@ const LoginForm = () => {
 
   const schema = {
     username: Joi.string().required(),
-    password: Joi.string().regex("^[a-zA-Z0-9]{3,30}$").required(),
+    password: Joi.string().min(3).required(),
   };
 
   const [errors, setErrors] = useState({});
-
-  const clearState = () => {
-    setUser({
-      username: "",
-      password: "",
-    });
-  };
+  // const clearState = () => {
+  //   setUser({
+  //     username: "",
+  //     password: "",
+  //   });
+  // };
 
   const validateInput = (event) => {
     if (event) event.preventDefault();
