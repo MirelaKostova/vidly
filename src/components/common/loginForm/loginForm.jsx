@@ -1,36 +1,80 @@
 import React from "react";
-import Joi from "joi";
-import Illustration from "./media/illustration.svg";
 import { Link } from "react-router-dom";
+import { useState } from "react";
+import Joi from "joi-browser";
+import Illustration from "./media/illustration.svg";
 import "./loginForm.css";
 
 const LoginForm = () => {
+  const [user, setUser] = useState({
+    username: "",
+    password: "",
+  });
+
   const schema = {
-    username: Joi.string().alphanum().min(3).max(30).required(),
-    password: Joi.string()
-      .pattern(new RegExp("^[a-zA-Z0-9]{3,30}$"))
-      .required(),
+    username: Joi.string().required(),
+    password: Joi.string().regex("^[a-zA-Z0-9]{3,30}$").required(),
   };
 
-  const [username, setUsername] = React.useState("");
-  const [password, setPassword] = React.useState("");
+  const [errors, setErrors] = useState({});
 
-  const validate = (username, password) => {
-    const errors = {};
-
-    if (username.trim() === "") {
-      errors.username = "Username is required.";
-    }
-
-    if (password.trim() === "") {
-      errors.password = "Password is required.";
-    }
-
-    return Object.keys(errors).length === 0 ? null : errors;
-    // const validateUsername = Joi.validate(username, schema);
-
-    // const validatePassword = Joi.validate(password, schema);
+  const clearState = () => {
+    setUser({
+      username: "",
+      password: "",
+    });
   };
+
+  const validateInput = (event) => {
+    if (event) event.preventDefault();
+    const result = Joi.validate(user, schema);
+    console.log(result);
+
+    const { error } = result;
+
+    if (!error) {
+      return null;
+    } else {
+      const errorData = {};
+      for (let item of error.details) {
+        const name = item.path[0];
+        const message = item.message;
+        errorData[name] = message;
+      }
+      console.log(errors);
+      setErrors(errorData);
+      return errorData;
+    }
+    // if (username.trim() === "") {
+    //   errors.username = "Username is required.";
+    // }
+
+    // if (password.trim() === "") {
+    //   errors.password = "Password is required.";
+    // }
+
+    // return Object.keys(errors).length === 0 ? null : errors;
+  };
+
+  // const validateForm = (event) => {
+  //   event.preventDefault();
+  //   const result = Joi.validate(customer, schema, { abortEarly: false });
+  //   console.log(result);
+  //   const { error } = result;
+  //   if (!error) {
+  //     return null;
+  //   } else {
+  //     const errorData = {};
+  //     for (let item of error.details) {
+  //       const name = item.path[0];
+  //       const message = item.message;
+  //       errorData[name] = message;
+  //     }
+  //     console.log(errors);
+  //     setErrors(errorData);
+  //     return errorData;
+  //   }
+  // };
 
   const handleSubmit = (event) => {
     if (event) event.preventDefault();
@@ -39,6 +83,30 @@ const LoginForm = () => {
     // const errors = validate(username, password);
 
     // if (errors) return;
+
+    const { name, value } = event.target;
+    let errorData = { ...errors };
+
+    const errorMessage = validateProperty(event);
+    if (errorMessage) {
+      errorData[name] = errorMessage;
+    } else {
+      delete errorData[name];
+    }
+
+    let userData = { ...user };
+    userData[name] = value;
+    setUser(userData);
+    setErrors(errorData);
+  };
+
+  const validateProperty = (event) => {
+    const { name, value } = event.target;
+    const obj = { [name]: value };
+    const subSchema = { [name]: schema[name] };
+    const result = Joi.validate(obj, subSchema);
+    const { error } = result;
+    return error ? error.details[0].message : null;
   };
 
   return (
@@ -54,25 +122,25 @@ const LoginForm = () => {
               autoFocus
               type="username"
               id="usernameForm"
-              value={username}
+              value={user.username}
               className="form-control"
-              onChange={(e) => setUsername(e.target.value)}
+              onChange={(e) => setUser(e.target.value)}
             />
             <label className="form-label" htmlFor="usernameForm">
               Username
             </label>
           </div>
           {/* <div className="alert alert-ganger">{validate().username}</div> */}
-          {/* {errors && <div className="alert alert-ganger">{errors}</div>} */}
+          {errors && <div className="alert alert-ganger">{errors}</div>}
 
           {/* Password input */}
           <div className="form-outline mb-4">
             <input
               type="password"
               id="pwdForm"
-              value={password}
+              value={user.password}
               className="form-control"
-              onChange={(e) => setPassword(e.target.value)}
+              onChange={(e) => setUser(e.target.value)}
             />
             <label className="form-label" htmlFor="pwdForm">
               Password
