@@ -3,8 +3,8 @@ import { Link } from "react-router-dom";
 import { useState } from "react";
 import Joi from "joi";
 import Illustration from "./media/illustration.svg";
+import Input from "./input";
 import "./loginForm.css";
-import { zip } from "lodash";
 
 class LoginForm extends Component {
   state = { account: { username: "", password: "" } };
@@ -29,35 +29,23 @@ class LoginForm extends Component {
             <h1>Welcome back</h1>
             <p>Please enter your details</p>
 
-            {/* -------------- Username input -------------- */}
             <div className="form-outline">
-              <input
-                autoFocus
-                value={account.username}
-                onChange={this.handleChange}
-                name="username"
-                id="usernameForm"
-                type="text"
-                className="form-control"
-              />
-              <label className="form-label" htmlFor="usernameForm">
-                Username
-              </label>
               {/* {errors && <div className="alert alert-ganger">{errors}</div>} */}
 
-              {/* -------------- Password input -------------- */}
               <div className="form-outline mb-4">
-                <input
-                  value={account.password}
+                <Input
+                  name="username"
+                  value={account.username}
+                  label="Username"
                   onChange={this.handleChange}
-                  name="password"
-                  id="pwdForm"
-                  type="text"
-                  className="form-control"
                 />
-                <label className="form-label" htmlFor="pwdForm">
-                  Password
-                </label>
+
+                <Input
+                  name="password"
+                  value={account.password}
+                  label="Password"
+                  onChange={this.handleChange}
+                />
               </div>
               {/* <div className="alert alert-ganger">{validate().password}</div> */}
 
