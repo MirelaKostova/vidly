@@ -7,18 +7,101 @@ import "./loginForm.css";
 import { zip } from "lodash";
 
 class LoginForm extends Component {
-  state = {};
+  state = { account: { username: "", password: "" } };
+
   handleSubmit = (event) => {
     if (event) event.preventDefaul();
   };
+
+  handleChange = ({ currentTarget: input }) => {
+    const account = { ...this.state.account };
+    account[input.name] = input.value;
+    this.setState({ account });
+  };
+
   render() {
+    const { account } = this.state;
+
     return (
       <div className="wrapper-container d-flex justify-content-center">
         <div className="login-container">
           <form onSubmit={this.handleSubmit}>
             <h1>Welcome back</h1>
             <p>Please enter your details</p>
+
+            {/* -------------- Username input -------------- */}
+            <div className="form-outline">
+              <input
+                autoFocus
+                value={account.username}
+                onChange={this.handleChange}
+                name="username"
+                id="usernameForm"
+                type="text"
+                className="form-control"
+              />
+              <label className="form-label" htmlFor="usernameForm">
+                Username
+              </label>
+              {/* {errors && <div className="alert alert-ganger">{errors}</div>} */}
+
+              {/* -------------- Password input -------------- */}
+              <div className="form-outline mb-4">
+                <input
+                  value={account.password}
+                  onChange={this.handleChange}
+                  name="password"
+                  id="pwdForm"
+                  type="text"
+                  className="form-control"
+                />
+                <label className="form-label" htmlFor="pwdForm">
+                  Password
+                </label>
+              </div>
+              {/* <div className="alert alert-ganger">{validate().password}</div> */}
+
+              {/* 2 column grid layout for inline styling */}
+              <div className="row mb-4">
+                <div className="col d-flex justify-content-center">
+                  {/* -------------- Checkbox -------------- */}
+                  <div className="form-check">
+                    <input
+                      className="form-check-input"
+                      type="checkbox"
+                      value="onChecked"
+                      id="checkbox"
+                    />
+                    <label className="form-check-label" htmlFor="checkbox">
+                      {" "}
+                      Remember me{" "}
+                    </label>
+                  </div>
+                </div>
+                <div className="col">
+                  {/* -------------- Forgot password? -------------- */}
+                  <Link to={"/movies"}>Forgot password?</Link>
+                </div>
+              </div>
+            </div>
+            {/* -------------- Submit button -------------- */}
+            <button type="button" className="btn btn-primary mb-4">
+              Sign in
+            </button>
+            <div className="text-center">
+              <p>
+                Not a member? <Link to="/register">Sign up</Link>
+              </p>
+            </div>
           </form>
+        </div>
+        {/* -------------- Image -------------- */}
+        <div className="image-container">
+          <img
+            className="illustration"
+            src={Illustration}
+            alt="login-illustration"
+          />
         </div>
       </div>
     );
@@ -26,97 +109,6 @@ class LoginForm extends Component {
 }
 
 export default LoginForm;
-
-// <div className="wrapper-container d-flex justify-content-center">
-//     //   <div className="login-container">
-//     //     <form onSubmit={handleSubmit}>
-//     //       <h1>Welcome back</h1>
-//     //       <p>Please enter your details</p>
-
-//     //       {/* Username input */
-// }
-//     //       <div className="form-outline">
-//     //         <input
-//     //           autoFocus
-//     //           type="username"
-//     //           id="usernameForm"
-//     //           value={user.username}
-//     //           className="form-control"
-//     //           onChange={(e) => setUser(e.target.value)}
-//     //         />
-//     //         <label className="form-label" htmlFor="usernameForm">
-//     //           Username
-//     //         </label>
-//     //       </div>
-//     //       {/* <div className="alert alert-ganger">{validate().username}</div> */}
-//     //       {errors && <div className="alert alert-ganger">{errors}</div>}
-
-//     //       {/* Password input */}
-//     //       <div className="form-outline mb-4">
-//     //         <input
-//     //           type="password"
-//     //           id="pwdForm"
-//     //           value={user.password}
-//     //           className="form-control"
-//     //           onChange={(e) => setUser(e.target.value)}
-//     //         />
-//     //         <label className="form-label" htmlFor="pwdForm">
-//     //           Password
-//     //         </label>
-//     //       </div>
-//     //       {/* <div className="alert alert-ganger">{validate().password}</div> */}
-
-//     //       {/* 2 column grid layout for inline styling */}
-//     //       <div className="row mb-4">
-//     //         <div className="col d-flex justify-content-center">
-//     //           {/* Checkbox */}
-//     //           <div className="form-check">
-//     //             <input
-//     //               className="form-check-input"
-//     //               type="checkbox"
-//     //               value="onChecked"
-//     //               id="checkbox"
-//     //             />
-//     //             <label className="form-check-label" htmlFor="checkbox">
-//     //               {" "}
-//     //               Remember me{" "}
-//     //             </label>
-//     //           </div>
-//     //         </div>
-
-//     //         <div className="col">
-//     //           {/* Simple link */}
-//     //           <a href="#!">Forgot password?</a>
-//     //         </div>
-//     //       </div>
-
-//     //       {/* Submit button */}
-//     //       <button
-//     //         type="button"
-//     //         className="btn btn-primary btn-block mb-4"
-//     //         onClick={handleSubmit}
-//     //       >
-//     //         Sign in
-//     //       </button>
-
-//     //       {/* Register buttons */}
-//     //       <div className="text-center">
-//     //         <p>
-//     //           Not a member? <Link to="/register">Register</Link>
-//     //         </p>
-//     //       </div>
-//     //     </form>
-//     //   </div>
-
-//     //   {/* Image */}
-//     //   <div className="image-container">
-//     //     <img
-//     //       className="illustration"
-//     //       src={Illustration}
-//     //       alt="login-illustration"
-//     //     />
-//     //   </div>
-//     // </div>
 
 /* const LoginForm = () => {
 //   // const [user, setUser] = useState({
