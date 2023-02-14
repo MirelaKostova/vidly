@@ -7,10 +7,27 @@ import Input from "./input";
 import "./loginForm.css";
 
 class LoginForm extends Component {
-  state = { account: { username: "", password: "" } };
+  state = { account: { username: "", password: "" }, errors: {} };
+
+  // Very basic validation. Not scalable
+  validate = () => {
+    const errors = {};
+
+    const { account } = this.state;
+    if (account.username.trim() === "")
+      errors.username = "Username is required.";
+    if (account.password.trim() === "")
+      errors.password = "Password is required.";
+
+    return Object.keys(errors).length === 0 ? null : errors;
+  };
 
   handleSubmit = (event) => {
-    if (event) event.preventDefaul();
+    if (event) event.preventDefault();
+    const errors = this.validate();
+    console.log(errors);
+    this.setState({ errors: errors || {} });
+    if (errors) return;
   };
 
   handleChange = ({ currentTarget: input }) => {
@@ -20,7 +37,7 @@ class LoginForm extends Component {
   };
 
   render() {
-    const { account } = this.state;
+    const { account, errors } = this.state;
 
     return (
       <div className="wrapper-container d-flex justify-content-center">
@@ -30,14 +47,13 @@ class LoginForm extends Component {
             <p>Please enter your details</p>
 
             <div className="form-outline">
-              {/* {errors && <div className="alert alert-ganger">{errors}</div>} */}
-
               <div className="form-outline mb-4">
                 <Input
                   name="username"
                   value={account.username}
                   label="Username"
                   onChange={this.handleChange}
+                  error={errors.username}
                 />
 
                 <Input
@@ -45,9 +61,9 @@ class LoginForm extends Component {
                   value={account.password}
                   label="Password"
                   onChange={this.handleChange}
+                  error={errors.password}
                 />
               </div>
-              {/* <div className="alert alert-ganger">{validate().password}</div> */}
 
               {/* 2 column grid layout for inline styling */}
               <div className="row mb-4">
@@ -73,7 +89,11 @@ class LoginForm extends Component {
               </div>
             </div>
             {/* -------------- Submit button -------------- */}
-            <button type="button" className="btn btn-primary mb-4">
+            <button
+              type="button"
+              className="btn btn-primary mb-4"
+              onClick={this.handleSubmit}
+            >
               Sign in
             </button>
             <div className="text-center">
