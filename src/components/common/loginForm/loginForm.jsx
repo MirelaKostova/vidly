@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
 // import { useState } from "react";
-// import Joi from "joi";
+import Joi from "joi";
 import Illustration from "./media/illustration.svg";
 import Input from "./input";
 import "./loginForm.css";
@@ -9,19 +9,50 @@ import "./loginForm.css";
 class LoginForm extends Component {
   state = { account: { username: "", password: "" }, errors: {} };
 
-  // Very basic validation. It`s not scalable.
+  schema = Joi.object({
+    username: Joi.string().min(3).max(30).required().label("Username"),
+    password: Joi.string()
+      .pattern(new RegExp("^[a-zA-Z0-9]{3,30}$"))
+      .required()
+      .label("Password"),
+  });
+
+  // Very basic validation. (not scalable)
+  // -----------------------------------------
+  // validate = () => {
+  //   const { account } = this.state;
+  //   const errors = {};
+  //   if (account.username.trim() === "")
+  //     errors.username = "Username is required.";
+  //   if (account.password.trim() === "")
+  //     errors.password = "Password is required.";
+
+  //   return Object.keys(errors).length === 0 ? null : errors;
+  // };
+
   validate = () => {
-    const errors = {};
-
+    const options = { abortEarly: false };
+    // abortEarly -> stops validation on the first error,
+    // when false -> returns all the errors found.
     const { account } = this.state;
-    if (account.username.trim() === "")
-      errors.username = "Username is required.";
-    if (account.password.trim() === "")
-      errors.password = "Password is required.";
+    const { error } = this.schema.validate(account, options);
 
-    return Object.keys(errors).length === 0 ? null : errors;
+    console.log("error->", error);
+    console.log("error.details", error.details);
+
+    if (!error.details) return null;
+
+    const errors = error.details.map(
+      (err) => (error[err.path[0]] = err.message)
+    );
+
+    console.log("errors->", errors);
+
+    return errors;
   };
 
+  // Very basic validation on change
+  // -------------------------------
   validateProperty = ({ name, value }) => {
     if (name === "username")
       if (value.trim() === "") return "Username is required.";
@@ -34,7 +65,7 @@ class LoginForm extends Component {
   handleSubmit = (event) => {
     if (event) event.preventDefault();
     const errors = this.validate();
-    console.log(errors);
+    // console.log(errors);
     this.setState({ errors: errors || {} });
     if (errors) return;
   };
@@ -42,6 +73,7 @@ class LoginForm extends Component {
   handleChange = ({ currentTarget: input }) => {
     const errors = { ...this.state.errors };
     const errorMessage = this.validateProperty(input);
+
     if (errorMessage) errors[input.name] = errorMessage;
     else delete errors[input.name];
 
