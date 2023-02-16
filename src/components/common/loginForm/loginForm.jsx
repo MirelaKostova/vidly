@@ -6,16 +6,56 @@ import Illustration from "./media/illustration.svg";
 import Input from "./input";
 import "./loginForm.css";
 
+const mySchema = {
+  username: Joi.string().min(3).max(30).required().label("Username"),
+  password: Joi.string()
+    .pattern(new RegExp("^[a-zA-Z0-9]{3,30}$"))
+    .required()
+    .label("Password"),
+};
+
 class LoginForm extends Component {
   state = { account: { username: "", password: "" }, errors: {} };
 
-  schema = Joi.object({
-    username: Joi.string().min(3).max(30).required().label("Username"),
-    password: Joi.string()
-      .pattern(new RegExp("^[a-zA-Z0-9]{3,30}$"))
-      .required()
-      .label("Password"),
-  });
+  schema = Joi.object(mySchema);
+
+  validate = () => {
+    const options = { abortEarly: false };
+    // abortEarly -> stops validation on the first error,
+    // when false -> returns all the errors found.
+    const { account } = this.state;
+    const { error } = this.schema.validate(account, options);
+
+    // console.log("error->", error);
+    // console.log("error.details", error.details);
+
+    if (!error.details) return null;
+
+    const errors = error.details.map(
+      (err) => (error[err.path[0]] = err.message)
+    );
+
+    // console.log("errors->", errors);
+    // console.log("schema validate()->", this.schema.keys);
+    return errors;
+  };
+
+  validateProperty = ({ name, value }) => {
+    console.log("name -> ", name);
+    console.log("value -> ", value);
+
+    const obj = { [name]: value };
+
+    // console.log("this.schema->", this.schema);
+    console.log("mySchema.password->", mySchema.password);
+    // const schema = { [name]: this.schema[name] };
+    // console.log("schema->", this.schema, "name->", name);
+
+    // console.log("schema->", schema);
+
+    // const { error } = this.schema.validate(obj);
+    // return error ? error.details[0].message : null;
+  };
 
   // Very basic validation. (not scalable)
   // -----------------------------------------
@@ -30,37 +70,16 @@ class LoginForm extends Component {
   //   return Object.keys(errors).length === 0 ? null : errors;
   // };
 
-  validate = () => {
-    const options = { abortEarly: false };
-    // abortEarly -> stops validation on the first error,
-    // when false -> returns all the errors found.
-    const { account } = this.state;
-    const { error } = this.schema.validate(account, options);
-
-    console.log("error->", error);
-    console.log("error.details", error.details);
-
-    if (!error.details) return null;
-
-    const errors = error.details.map(
-      (err) => (error[err.path[0]] = err.message)
-    );
-
-    console.log("errors->", errors);
-
-    return errors;
-  };
-
   // Very basic validation on change
   // -------------------------------
-  validateProperty = ({ name, value }) => {
-    if (name === "username")
-      if (value.trim() === "") return "Username is required.";
-    // ...
-    if (name === "password")
-      if (value.trim() === "") return "Password is required.";
-    // ...
-  };
+  // validateProperty = ({ name, value }) => {
+  //   if (name === "username")
+  //     if (value.trim() === "") return "Username is required.";
+  //   // ...
+  //   if (name === "password")
+  //     if (value.trim() === "") return "Password is required.";
+  //   // ...
+  // };
 
   handleSubmit = (event) => {
     if (event) event.preventDefault();
@@ -81,6 +100,30 @@ class LoginForm extends Component {
     account[input.name] = input.value;
     this.setState({ account, errors });
   };
+
+  // Very basic validation. (not scalable)
+  // -----------------------------------------
+  // validate = () => {
+  //   const { account } = this.state;
+  //   const errors = {};
+  //   if (account.username.trim() === "")
+  //     errors.username = "Username is required.";
+  //   if (account.password.trim() === "")
+  //     errors.password = "Password is required.";
+
+  //   return Object.keys(errors).length === 0 ? null : errors;
+  // };
+
+  // Very basic validation on change
+  // -------------------------------
+  // validateProperty = ({ name, value }) => {
+  //   if (name === "username")
+  //     if (value.trim() === "") return "Username is required.";
+  //   // ...
+  //   if (name === "password")
+  //     if (value.trim() === "") return "Password is required.";
+  //   // ...
+  // };
 
   render() {
     const { account, errors } = this.state;
