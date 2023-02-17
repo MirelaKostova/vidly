@@ -9,15 +9,19 @@ import "./loginForm.css";
 const mySchema = {
   username: Joi.string().min(3).max(30).required().label("Username"),
   password: Joi.string()
-    .pattern(new RegExp("^[a-zA-Z0-9]{3,30}$"))
-    .required()
-    .label("Password"),
+    .pattern(new RegExp("^[a-zA-Z0-9]"))
+    .label("Password")
+    .required(),
 };
 
 class LoginForm extends Component {
   state = { account: { username: "", password: "" }, errors: {} };
 
   schema = Joi.object(mySchema);
+
+  // componentDidMount = () => {
+  //   console.log("componentDidMount");
+  // };
 
   validate = () => {
     const options = { abortEarly: false };
@@ -26,35 +30,33 @@ class LoginForm extends Component {
     const { account } = this.state;
     const { error } = this.schema.validate(account, options);
 
-    // console.log("error->", error);
-    // console.log("error.details", error.details);
+    if (!error?.details) return null;
 
-    if (!error.details) return null;
-
-    const errors = error.details.map(
-      (err) => (error[err.path[0]] = err.message)
-    );
+    const errors =
+      error && error.details.map((err) => (error[err.path[0]] = err.message));
 
     // console.log("errors->", errors);
-    // console.log("schema validate()->", this.schema.keys);
     return errors;
   };
 
   validateProperty = ({ name, value }) => {
-    console.log("name -> ", name);
-    console.log("value -> ", value);
-
-    const obj = { [name]: value };
+    // console.log("value -> ", value);
+    // console.log("name -> ", name);
+    const obj = {};
+    obj[name] = value;
 
     // console.log("this.schema->", this.schema);
-    console.log("mySchema.password->", mySchema.password);
-    // const schema = { [name]: this.schema[name] };
+    // console.log("obj->", obj);
     // console.log("schema->", this.schema, "name->", name);
-
     // console.log("schema->", schema);
 
-    // const { error } = this.schema.validate(obj);
-    // return error ? error.details[0].message : null;
+    const validateResult = mySchema[name].validate(value);
+
+    // console.log("VALIDATE_PROPERTY Error -> ", validateResult, obj);
+
+    const { error } = validateResult;
+
+    return error ? error.details[0].message : null;
   };
 
   // Very basic validation. (not scalable)
@@ -93,12 +95,16 @@ class LoginForm extends Component {
     const errors = { ...this.state.errors };
     const errorMessage = this.validateProperty(input);
 
+    // console.log("errorMessage -> ", errorMessage);
+
     if (errorMessage) errors[input.name] = errorMessage;
     else delete errors[input.name];
 
     const account = { ...this.state.account };
     account[input.name] = input.value;
     this.setState({ account, errors });
+
+    // console.log("this.state -> ", this.state);
   };
 
   // Very basic validation. (not scalable)
