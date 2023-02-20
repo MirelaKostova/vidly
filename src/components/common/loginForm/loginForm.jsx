@@ -185,6 +185,7 @@ class LoginForm extends Component {
             </div>
             {/* -------------- Submit button -------------- */}
             <button
+              disabled={this.validate()}
               type="button"
               className="btn btn-primary mb-4"
               onClick={this.handleSubmit}
