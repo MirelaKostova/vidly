@@ -1,6 +1,5 @@
 import { Link } from "react-router-dom";
 import Illustration from "./media/illustration.svg";
-import Input from "./input";
 import Form from "./form";
 import "./loginForm.css";
 
@@ -13,8 +12,6 @@ class LoginForm extends Form {
   };
 
   render() {
-    const { data, errors } = this.state;
-
     return (
       <div className="wrapper-container d-flex justify-content-center">
         <div className="login-container">
@@ -24,21 +21,8 @@ class LoginForm extends Form {
 
             <div className="form-outline">
               <div className="form-outline mb-4">
-                <Input
-                  name="username"
-                  value={data.username}
-                  label="Username"
-                  onChange={this.handleChange}
-                  error={errors.username}
-                />
-
-                <Input
-                  name="password"
-                  value={data.password}
-                  label="Password"
-                  onChange={this.handleChange}
-                  error={errors.password}
-                />
+                {this.renderInput("username", "Username")}
+                {this.renderInput("password", "Password", "password")}
               </div>
 
               {/* 2 column grid layout for inline styling */}
@@ -65,14 +49,8 @@ class LoginForm extends Form {
               </div>
             </div>
             {/* -------------- Submit button -------------- */}
-            <button
-              disabled={this.validate()}
-              type="button"
-              className="btn btn-primary mb-4"
-              onClick={this.handleSubmit}
-            >
-              Sign in
-            </button>
+            {this.renderButton("Sign in")}
+
             <div className="text-center">
               <p>
                 Not a member? <Link to="/register">Sign up</Link>

@@ -1,5 +1,6 @@
 import { Component } from "react";
 import Joi from "joi";
+import Input from "./input";
 
 const mySchema = {
   username: Joi.string().min(3).max(30).required().label("Username"),
@@ -64,6 +65,33 @@ class Form extends Component {
     this.setState({ data, errors });
   };
 
+  renderInput = (name, label, type = "text") => {
+    const { data, errors } = this.state;
+
+    return (
+      <Input
+        type={type}
+        name={name}
+        value={data[name]}
+        label={label}
+        onChange={this.handleChange}
+        error={errors[name]}
+      />
+    );
+  };
+
+  renderButton = (label) => {
+    return (
+      <button
+        disabled={this.validate()}
+        type="button"
+        className="btn btn-primary mb-4"
+        onClick={this.handleSubmit}
+      >
+        {label}
+      </button>
+    );
+  };
   // Very basic validation. (not scalable)
   // -----------------------------------------
   // validate = () => {
