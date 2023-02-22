@@ -21,8 +21,13 @@ class LoginForm extends Form {
 
             <div className="form-outline">
               <div className="form-outline mb-4">
-                {this.renderInput("username", "Username")}
-                {this.renderInput("password", "Password", "password")}
+                {this.renderInput("username", "Username", "usernameInput")}
+                {this.renderInput(
+                  "password",
+                  "Password",
+                  "password",
+                  "loginPwd"
+                )}
               </div>
 
               {/* 2 column grid layout for inline styling */}

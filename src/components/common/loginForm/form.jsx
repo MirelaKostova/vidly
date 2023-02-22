@@ -4,10 +4,18 @@ import Input from "./input";
 
 const mySchema = {
   username: Joi.string().min(3).max(30).required().label("Username"),
+  email: Joi.string()
+    .email({
+      minDomainSegments: 2,
+      tlds: { allow: ["com", "net"] },
+    })
+    .label("Email")
+    .required(),
   password: Joi.string()
     .pattern(new RegExp("^[a-zA-Z0-9]"))
     .label("Password")
     .required(),
+  repeat_password: Joi.ref("password"),
 };
 
 class Form extends Component {
@@ -65,12 +73,13 @@ class Form extends Component {
     this.setState({ data, errors });
   };
 
-  renderInput = (name, label, type = "text") => {
+  renderInput = (name, label, type = "text", id) => {
     const { data, errors } = this.state;
 
     return (
       <Input
         type={type}
+        id={id}
         name={name}
         value={data[name]}
         label={label}
