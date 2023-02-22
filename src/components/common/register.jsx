@@ -4,7 +4,10 @@ import Form from "./loginForm/form";
 import Image from "./loginForm/media/illustration.svg";
 
 class Register extends Form {
-  state = { data: { username: "", password: "" }, errors: {} };
+  state = {
+    data: { username: "", password: "", email: "", repeat_password: "" },
+    errors: {},
+  };
 
   render() {
     return (
@@ -12,12 +15,12 @@ class Register extends Form {
         <div className="register-container flex-column mb-3">
           <h1>Sign up</h1>
           <form>
-            <div className="form-outline mb-2">
-              {this.renderInput("name", "Name", "nameInput")}
+            <div className="form-outline mb-3">
+              {this.renderInput("username", "Name", "nameInput")}
               {this.renderInput("email", "Your Email", "emailInput")}
               {this.renderInput("password", "Password", "password", "pswInput")}
               {this.renderInput(
-                "password",
+                "repeat_password",
                 "Repeat your Password",
                 "password",
                 "repeatPwd"

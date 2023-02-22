@@ -4,7 +4,10 @@ import Form from "./form";
 import "./loginForm.css";
 
 class LoginForm extends Form {
-  state = { data: { username: "", password: "" }, errors: {} };
+  state = {
+    data: { username: "", email: "", password: "", repeat_password: "" },
+    errors: {},
+  };
 
   doSubmit = () => {
     // Call the server
