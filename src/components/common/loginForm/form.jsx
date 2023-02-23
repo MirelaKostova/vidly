@@ -15,7 +15,10 @@ const mySchema = {
     .pattern(new RegExp("^[a-zA-Z0-9]"))
     .label("Password")
     .required(),
-  repeat_password: Joi.ref("password"),
+  confirmation: Joi.string()
+    .valid(Joi.ref("password"))
+    .required()
+    .label("Confirm password"),
 };
 
 class Form extends Component {
@@ -42,7 +45,10 @@ class Form extends Component {
   };
 
   validateProperty = ({ name, value }) => {
-    const validateResult = mySchema[name].validate(value);
+    console.log("name ->", name);
+    console.log("value ->", value);
+    console.log("mySchema[name] ->", mySchema.confirmation);
+    const validateResult = mySchema[name]?.validate(value);
 
     const { error } = validateResult;
 

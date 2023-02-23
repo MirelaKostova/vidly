@@ -1,11 +1,10 @@
-import { Component } from "react";
 import { Link } from "react-router-dom";
 import Form from "./loginForm/form";
 import Image from "./loginForm/media/illustration.svg";
 
 class Register extends Form {
   state = {
-    data: { username: "", password: "", email: "", repeat_password: "" },
+    data: { username: "", password: "", email: "", confirmation: "" },
     errors: {},
   };
 
@@ -20,10 +19,10 @@ class Register extends Form {
               {this.renderInput("email", "Your Email", "emailInput")}
               {this.renderInput("password", "Password", "password", "pswInput")}
               {this.renderInput(
-                "repeat_password",
-                "Repeat your Password",
+                "confirmation",
+                "Confirm password",
                 "password",
-                "repeatPwd"
+                "passwordConfirmation"
               )}
             </div>
 
