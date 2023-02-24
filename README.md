@@ -35,8 +35,13 @@ export default Like;
 - Paginating, filtering, sorting
 
 - Routing
-- Forms and their validation using Joi
+- Forms 
   <img width="1424" alt="Screenshot 2023-01-31 at 11 45 27" src="https://user-images.githubusercontent.com/106656146/215725345-8cf49c07-a4a3-451f-bd7a-c0c6636a2fe2.png">
+  
+  and their validation using Joi 
+  <img width="1442" alt="Screenshot 2023-02-24 at 13 06 30" src="https://user-images.githubusercontent.com/106656146/221164312-b89a0e77-d40d-4905-96d8-4ec3575cf1b4.png">
+
+  
 
 - Calling backends services - Axios used for this project
 - Authentification & Authorization
