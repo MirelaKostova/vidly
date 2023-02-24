@@ -4,21 +4,21 @@ import Input from "./input";
 
 const mySchema = {
   username: Joi.string().min(3).max(30).required().label("Username"),
-  email: Joi.string()
-    .email({
-      minDomainSegments: 2,
-      tlds: { allow: ["com", "net"] },
-    })
-    .label("Email")
-    .required(),
+  // email: Joi.string()
+  //   .email({
+  //     minDomainSegments: 2,
+  //     tlds: { allow: ["com", "net"] },
+  //   })
+  //   .label("Email")
+  //   .required(),
   password: Joi.string()
     .pattern(new RegExp("^[a-zA-Z0-9]"))
     .label("Password")
     .required(),
-  confirmation: Joi.string()
-    .required()
-    .valid(Joi.ref("password"))
-    .label("Confirm password"),
+  // confirmation: Joi.string()
+  //   .required()
+  //   .valid(Joi.ref("password"))
+  //   .label("Confirm password"),
 };
 
 class Form extends Component {
@@ -35,6 +35,9 @@ class Form extends Component {
     // when false -> returns all the errors found.
     const { data } = this.state;
     const { error } = this.schema.validate(data, options);
+
+    // console.log("Valdidate data: ", data);
+    // console.log("error: ", error);
 
     if (!error?.details) return null;
 

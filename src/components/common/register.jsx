@@ -8,6 +8,10 @@ class Register extends Form {
     errors: {},
   };
 
+  doSubmit = () => {
+    console.log("Submitted");
+  };
+
   render() {
     return (
       <div className="wrapper-container d-flex justify-content-center ">
