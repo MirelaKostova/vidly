@@ -4,7 +4,7 @@ import Image from "./loginForm/media/illustration.svg";
 
 class Register extends Form {
   state = {
-    data: { username: "", password: "", email: "", confirmation: "" },
+    data: { username: "", password: "", email: "" },
     errors: {},
   };
 
@@ -18,12 +18,6 @@ class Register extends Form {
               {this.renderInput("username", "Name", "nameInput")}
               {this.renderInput("email", "Your Email", "emailInput")}
               {this.renderInput("password", "Password", "password", "pswInput")}
-              {this.renderInput(
-                "confirmation",
-                "Confirm password",
-                "password",
-                "passwordConfirmation"
-              )}
             </div>
 
             {/* -------------- Checkbox -------------- */}

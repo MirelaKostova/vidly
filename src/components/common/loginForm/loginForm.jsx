@@ -5,7 +5,7 @@ import "./loginForm.css";
 
 class LoginForm extends Form {
   state = {
-    data: { username: "", email: "", password: "", confirmation: "" },
+    data: { username: "", email: "", password: "" },
     errors: {},
   };
 

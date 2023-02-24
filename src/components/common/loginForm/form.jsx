@@ -16,8 +16,8 @@ const mySchema = {
     .label("Password")
     .required(),
   confirmation: Joi.string()
-    .valid(Joi.ref("password"))
     .required()
+    .valid(Joi.ref("password"))
     .label("Confirm password"),
 };
 
@@ -40,16 +40,16 @@ class Form extends Component {
 
     const errors =
       error && error.details.map((err) => (error[err.path[0]] = err.message));
-    // console.log("errors->", errors);
+
     return errors;
   };
 
   validateProperty = ({ name, value }) => {
-    console.log("name ->", name);
-    console.log("value ->", value);
-    console.log("mySchema[name] ->", mySchema.confirmation);
-    const validateResult = mySchema[name]?.validate(value);
+    // console.log("name->", name);
+    // console.log("value->", value);
+    // console.log("mySchema[name]->", mySchema[name]);
 
+    const validateResult = mySchema[name]?.validate(value);
     const { error } = validateResult;
 
     return error ? error.details[0].message : null;
@@ -84,11 +84,11 @@ class Form extends Component {
 
     return (
       <Input
-        type={type}
-        id={id}
         name={name}
-        value={data[name]}
         label={label}
+        id={id}
+        type={type}
+        value={data[name]}
         onChange={this.handleChange}
         error={errors[name]}
       />
