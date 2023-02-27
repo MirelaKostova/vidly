@@ -6,8 +6,9 @@ import NotFound from "./components/notFound";
 import NavBar from "./components/common/navBar";
 import MovieForm from "./components/movieForm";
 import LoginForm from "./components/common/loginForm/loginForm";
-import Footer from "./components/common/Footer/footer";
+// import Footer from "./components/common/Footer/footer";
 import Register from "./components/common/register";
+import NewMovieForm from "./components/newMovieForm";
 import "./App.css";
 
 const App = () => {
@@ -22,6 +23,7 @@ const App = () => {
           <Route path="/register" element={<Register />} />
           <Route path="/movies" element={<Movies />} />
           <Route path="/movies/:ißd" element={<MovieForm />} />
+          <Route path="/movies/new" element={<NewMovieForm />} />
           <Route path="/customers" element={<Customers />} />
           <Route path="/rentals" element={<Rentals />} />
           <Route path="/not-found" element={<NotFound />} />

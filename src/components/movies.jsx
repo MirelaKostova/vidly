@@ -9,6 +9,7 @@ import Pagination from "./common/pagination";
 import paginate from "../utils/paginate";
 import filter from "../utils/filter";
 import sort from "../utils/sort";
+import Button from "./common/button";
 
 const defaultGenreValue = { _id: "", name: "All Genres" };
 
@@ -93,9 +94,10 @@ class Movies extends Component {
             selectedGenre={selectedGenre}
             onGenreSelect={this.handleGenreSelect}
           />
-          <div className="table-wrapper mx-3">
-            <Message filteredMovies={filteredMovies} />
 
+          <div className="table-wrapper mx-3">
+            <Button label="Add new movie" onClick={}/>
+            <Message filteredMovies={filteredMovies} />
             <MoviesTable
               movies={movies}
               sortColumn={sortColumn}
