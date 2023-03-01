@@ -1,33 +1,16 @@
 import { Component } from "react";
-import Joi from "joi";
 import Input from "./input";
 
-const mySchema = {
-  username: Joi.string().min(3).max(30).required().label("Username"),
-  // email: Joi.string()
-  //   .email({
-  //     minDomainSegments: 2,
-  //     tlds: { allow: ["com", "net"] },
-  //   })
-  //   .label("Email")
-  //   .required(),
-  password: Joi.string()
-    .pattern(new RegExp("^[a-zA-Z0-9]"))
-    .label("Password")
-    .required(),
-  // confirmation: Joi.string()
-  //   .required()
-  //   .valid(Joi.ref("password"))
-  //   .label("Confirm password"),
-};
+// const getCurrSchema = () => {
+//   console.log("currSchema ->", this.schema);
+//   return this.schema;
+// };
 
 class Form extends Component {
   state = {
     data: {},
     errors: {},
   };
-
-  schema = Joi.object(mySchema);
 
   validate = () => {
     const options = { abortEarly: false };
@@ -36,24 +19,21 @@ class Form extends Component {
     const { data } = this.state;
     const { error } = this.schema.validate(data, options);
 
-    // console.log("Valdidate data: ", data);
-    // console.log("error: ", error);
+    console.log("Valdidate data: ", data);
+    console.log("error: ", error);
 
     if (!error?.details) return null;
 
-    const errors =
-      error && error.details.map((err) => (error[err.path[0]] = err.message));
-
-    return errors;
+    return (
+      error && error.details.map((err) => (error[err.path[0]] = err.message))
+    );
   };
 
   validateProperty = ({ name, value }) => {
     // console.log("name->", name);
     // console.log("value->", value);
-    // console.log("mySchema[name]->", mySchema[name]);
 
-    const validateResult = mySchema[name]?.validate(value);
-    const { error } = validateResult;
+    const { error } = this.schema[name]?.validate(value);
 
     return error ? error.details[0].message : null;
   };

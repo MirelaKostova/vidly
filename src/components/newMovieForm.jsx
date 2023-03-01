@@ -1,7 +1,9 @@
 import Form from "./common/loginForm/form";
 import Input from "./common/loginForm/input";
+import Image from "./common/loginForm/media/add_new_movie.svg";
 import uniqueId from "lodash/uniqueId";
 import Select from "./common/loginForm/select";
+import Joi from "joi";
 
 class NewMovieForm extends Form {
   state = {
@@ -16,6 +18,13 @@ class NewMovieForm extends Form {
     errors: {},
   };
 
+  schema = Joi.object({
+    title: Joi.string().required().min(3).max(30),
+    genre: Joi.string().required().min(3).max(30),
+    numberInStock: Joi.string().required().min(3).max(30),
+    dailyRentalRate: Joi.string().required().min(3).max(30),
+  });
+
   getNewId = () => {
     return uniqueId("movie_");
   };
@@ -23,6 +32,10 @@ class NewMovieForm extends Form {
   getCurrentDate = () => {
     let currPublishDate = new Date();
     return currPublishDate.toUTCString();
+  };
+
+  handleSave = () => {
+    console.log("---");
   };
 
   doSave = () => {
@@ -33,38 +46,41 @@ class NewMovieForm extends Form {
   render() {
     return (
       <>
-        <form className="wrapper-container justify-content-center ">
-          <h2>Add new movie</h2>
-          {/* <h2>{this.getNewId()}</h2>
-          <h2>{this.getCurrentDate()}</h2> */}
+        <div className="wrapper-container d-flex justify-content-center">
+          <div className="login-container">
+            <form onSave={this.handleSave}>
+              <h2>Add new movie</h2>
 
-          <div className="div-container " role="form">
-            {/* Title */}
-            {/* <Input name="title" label="Title" id="formControlTitle" /> */}
-            {this.renderInput("title", "Title", "formControlTitle")}
+              <div className="div-container " role="form">
+                {/* Title */}
+                {this.renderInput("title", "Title", "formControlTitle")}
 
-            {/* Genre */}
-            <Select name="genre" label="Genre" id="formControlGenre" />
-            {/* {this.renderInput("title", "Title", "formControlTitle")} */}
+                {/* Genre */}
+                <Select name="genre" label="Genre" id="formControlGenre" />
 
-            {/* Number In Stock */}
-            <Input
-              name="numberInStock"
-              label="Number in Stock"
-              id="formControlNumberInStock"
-            />
-            {this.renderInput(
-              "numberInStock",
-              "Number in Stock",
-              "formControlNumberInStock"
-            )}
+                {/* Number In Stock */}
+                {this.renderInput(
+                  "numberInStock",
+                  "Number in Stock",
+                  "formControlNumberInStock"
+                )}
 
-            {/* Rate */}
-            <Input name="dailyRentalRate" label="Rate" id="formControlRate" />
+                {/* Rate */}
+                {this.renderInput("dailyRentalRate", "Rate", "formControlRate")}
 
-            {this.renderButton("Save", "")}
+                {this.renderButton("Save", "")}
+                {/* -------------- Image -------------- */}
+                <div className="image-container">
+                  <img
+                    className="illustration"
+                    src={Image}
+                    alt="new-movie-illustration"
+                  />
+                </div>
+              </div>
+            </form>
           </div>
-        </form>
+        </div>
       </>
     );
   }

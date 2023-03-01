@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
-import Illustration from "./media/illustration.svg";
+import Illustration from "./media/login_illustration.svg";
 import Form from "./form";
+import Joi from "joi";
 import "./loginForm.css";
 
 class LoginForm extends Form {
@@ -8,6 +9,14 @@ class LoginForm extends Form {
     data: { username: "", password: "" },
     errors: {},
   };
+
+  schema = Joi.object({
+    username: Joi.string().min(3).max(30).required().label("Username"),
+    password: Joi.string()
+      .pattern(new RegExp("^[a-zA-Z0-9]"))
+      .label("Password")
+      .required(),
+  });
 
   doSubmit = () => {
     // Call the server
