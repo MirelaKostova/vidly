@@ -82,7 +82,9 @@ class Form extends Component {
     this.setState({ data, errors });
   };
 
-  renderInput = (name, label, type = "text", id) => {
+  renderSelect = (name, label, id, type = "text") => {};
+
+  renderInput = (name, label, id, type = "text") => {
     const { data, errors } = this.state;
 
     return (

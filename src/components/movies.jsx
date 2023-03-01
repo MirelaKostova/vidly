@@ -1,15 +1,15 @@
 import React, { Component } from "react";
 import { getMovies } from "../services/fakeMovieService";
 import { getGenres } from "../services/fakeGenreService";
-import "../../node_modules/font-awesome/css/font-awesome.css";
 import ListGroup from "./common/listGroup";
 import Message from "./message";
 import MoviesTable from "./moviesTable";
 import Pagination from "./common/pagination";
+import Button from "./common/button";
 import paginate from "../utils/paginate";
 import filter from "../utils/filter";
 import sort from "../utils/sort";
-import Button from "./common/button";
+import "../../node_modules/font-awesome/css/font-awesome.css";
 
 const defaultGenreValue = { _id: "", name: "All Genres" };
 
@@ -96,7 +96,7 @@ class Movies extends Component {
           />
 
           <div className="table-wrapper mx-3">
-            <Button label="Add new movie" onClick={}/>
+            <Button label="Add new movie" path="/movies/new" />
             <Message filteredMovies={filteredMovies} />
             <MoviesTable
               movies={movies}

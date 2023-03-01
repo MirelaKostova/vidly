@@ -18,6 +18,7 @@ const App = () => {
       <div className="main-container">
         <NavBar />
         <Routes>
+          <Route index element={<Movies />} />
           <Route path="/" render={() => navigate("/movies")} />
           <Route path="/login" element={<LoginForm />} />
           <Route path="/register" element={<Register />} />
