@@ -5,12 +5,13 @@ import Image from "./loginForm/media/register_illustration_2.svg";
 
 class Register extends Form {
   state = {
-    data: { username: "", password: "", email: "" },
+    data: { username: "", password: "", email: "", name: "" },
     errors: {},
   };
 
-  schema = Joi.object({
-    username: Joi.string().min(3).max(30).required().label("Username"),
+  fields = {
+    username: Joi.string().required().min(3).max(30).label("Username"),
+    name: Joi.string().min(3).max(30).required().label("Full Name"),
     email: Joi.string()
       .email({
         minDomainSegments: 2,
@@ -22,7 +23,7 @@ class Register extends Form {
       .pattern(new RegExp("^[a-zA-Z0-9]"))
       .label("Password")
       .required(),
-  });
+  };
 
   doSubmit = () => {
     console.log("Submitted");
@@ -38,13 +39,14 @@ class Register extends Form {
 
             <div className="form-outline">
               <div className="form-outline mb-4">
-                {this.renderInput("username", "Name", "nameInput")}
-                {this.renderInput("email", "Your Email", "emailInput")}
+                {this.renderInput("username", "Username", "nameInput")}
+                {this.renderInput("name", "Full Name", "nameInput")}
+                {this.renderInput("email", "Email Address", "emailInput")}
                 {this.renderInput(
                   "password",
                   "Password",
-                  "password",
-                  "pswInput"
+                  "pswInput",
+                  "password"
                 )}
               </div>
             </div>

@@ -1,5 +1,7 @@
 import { Component } from "react";
 import Input from "./input";
+import Select from "./select";
+import Joi from "joi";
 
 // const getCurrSchema = () => {
 //   console.log("currSchema ->", this.schema);
@@ -12,15 +14,32 @@ class Form extends Component {
     errors: {},
   };
 
+  constructor(props, context) {
+    // super(props, context);
+    // this.fields = this.fields.bind(this);
+  }
+
+  // that's a field property which should be set from component extender:
+  // {
+  //  username: Joi.string().min(3).max(30).required().label("Username"),
+  // }
+  fields = {};
+
+  schema = Joi.object(this.fields);
+
   validate = () => {
+    console.log("this.fields", this.fields);
+    console.log("this.schema", this.schema);
     const options = { abortEarly: false };
     // abortEarly -> stops validation on the first error,
     // when false -> returns all the errors found.
     const { data } = this.state;
+    // console.log("data -> ", data);
     const { error } = this.schema.validate(data, options);
 
-    console.log("Valdidate data: ", data);
+    // console.log("Valdidate data: ", data);
     console.log("error: ", error);
+    console.log("error details: ", error.details);
 
     if (!error?.details) return null;
 
@@ -33,7 +52,9 @@ class Form extends Component {
     // console.log("name->", name);
     // console.log("value->", value);
 
-    const { error } = this.schema[name]?.validate(value);
+    console.log();
+
+    const { error } = this.fields[name]?.validate(value);
 
     return error ? error.details[0].message : null;
   };
@@ -62,7 +83,17 @@ class Form extends Component {
     this.setState({ data, errors });
   };
 
-  renderSelect = (name, label, id, type = "text") => {};
+  renderSelect = (name, label, id) => {
+    return (
+      <Select
+        name={name}
+        label={label}
+        id={id}
+        // type={type}
+        // error={errors[name]}
+      />
+    );
+  };
 
   renderInput = (name, label, id, type = "text") => {
     const { data, errors } = this.state;
@@ -83,7 +114,7 @@ class Form extends Component {
   renderButton = (label) => {
     return (
       <button
-        disabled={this.validate()}
+        //disabled={this.validate()}
         type="button"
         className="btn btn-primary mb-4"
         onClick={this.handleSubmit}

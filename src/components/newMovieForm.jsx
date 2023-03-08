@@ -1,8 +1,6 @@
 import Form from "./common/loginForm/form";
-import Input from "./common/loginForm/input";
 import Image from "./common/loginForm/media/add_new_movie.svg";
 import uniqueId from "lodash/uniqueId";
-import Select from "./common/loginForm/select";
 import Joi from "joi";
 
 class NewMovieForm extends Form {
@@ -19,10 +17,10 @@ class NewMovieForm extends Form {
   };
 
   schema = Joi.object({
-    title: Joi.string().required().min(3).max(30),
-    genre: Joi.string().required().min(3).max(30),
-    numberInStock: Joi.string().required().min(3).max(30),
-    dailyRentalRate: Joi.string().required().min(3).max(30),
+    title: Joi.string().required().min(1).max(100),
+    genre: Joi.string().required().min(1).max(100),
+    numberInStock: Joi.string().required().min(0).max(100),
+    dailyRentalRate: Joi.string().required().min(0).max(10),
   });
 
   getNewId = () => {
@@ -47,38 +45,30 @@ class NewMovieForm extends Form {
     return (
       <>
         <div className="wrapper-container d-flex justify-content-center">
-          <div className="login-container">
+          <div className="new-movie-container">
             <form onSave={this.handleSave}>
               <h2>Add new movie</h2>
 
               <div className="div-container " role="form">
-                {/* Title */}
                 {this.renderInput("title", "Title", "formControlTitle")}
-
-                {/* Genre */}
-                <Select name="genre" label="Genre" id="formControlGenre" />
-
-                {/* Number In Stock */}
+                {this.renderSelect("genre", "Genre", "formControlGenre")}
                 {this.renderInput(
                   "numberInStock",
                   "Number in Stock",
-                  "formControlNumberInStock"
+                  "numberInStock"
                 )}
-
-                {/* Rate */}
                 {this.renderInput("dailyRentalRate", "Rate", "formControlRate")}
-
                 {this.renderButton("Save", "")}
-                {/* -------------- Image -------------- */}
-                <div className="image-container">
-                  <img
-                    className="illustration"
-                    src={Image}
-                    alt="new-movie-illustration"
-                  />
-                </div>
               </div>
             </form>
+          </div>
+          {/* -------------- Image -------------- */}
+          <div className="image-container">
+            <img
+              className="illustration"
+              src={Image}
+              alt="new-movie-illustration"
+            />
           </div>
         </div>
       </>
